@@ -5,8 +5,7 @@ class Ship extends component {
         super(props);
         this.state = {
             sunk: false,
-            hits: [],
-            coordinates: []
+            hits: []
         }
     }
 
