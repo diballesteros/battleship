@@ -4,23 +4,47 @@ import './Gameboard.css';
 import Square from './square/Square';
 
 class Gameboard extends Component {
-    // Render gameboard, decide if each individual square is a battleship or a regular square
-    // Initial 10 by 10 array
-    // Array begins with 100 ocean squares
-    // Coordinates construct the ship squares and replace ocean squares with ship squares  
     constructor(props) {
         super(props);
+
+        const initialBoard = new Array(100);
+        for (var i = 0; i < 100; i++) {
+          initialBoard[i] = {
+            hit: false,
+            position: i,
+            type: 'ocean'
+          };
+        };
+
         this.state = {
-            board : Array(100).fill(null)
+            board : initialBoard,
+            ships: []
         }
+    }
+
+    updateBoard(i) {
+      const modifiedBoard = this.state.board.slice();
+      const testShip = {
+        hit: true,
+        position: i,
+        type: 'ship'
+      }
+      modifiedBoard[i] = testShip;
+      this.setState({
+        board: modifiedBoard
+      });
     }
 
     render() {
       return (
         <div className='board'>
           {this.state.board.map((square, i) =>
-            <Square isShip={this.state.board[i]}></Square>)}
-          <Square />
+            <Square 
+              key={i}
+              type={this.state.board[i].type}
+              hit={this.state.board[i].hit}
+              hitHandler={() => this.updateBoard(i)}>
+            </Square>)}
         </div>
       );
     }

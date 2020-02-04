@@ -1,26 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Square.css';
 
-class Square extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sunk: false,
-            isShip: false
-        }
-    }
-
-    isSunk() {
-        let sunkStatus = this.state.hits.every(value => value === true);
-        this.setState({ sunk: sunkStatus });
-    };
-
-    render() {
-        return (
-            <div className="ocean-square">
-                Ocean Square
-            </div>
-        );
+const Square = (props) => {
+    switch (props.type) {
+        case "ship":
+            return <div onClick={props.hitHandler} className="square ship-square">{props.hit ? 'X' : ''}</div>
+        default:
+            return <div onClick={props.hitHandler} className="square ocean-square">{props.hit ? 'X' : ''}</div>
     }
 }
 
