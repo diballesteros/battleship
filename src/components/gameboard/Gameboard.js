@@ -17,8 +17,7 @@ class Gameboard extends Component {
         };
 
         this.state = {
-            board : initialBoard,
-            ships: []
+            board : initialBoard
         }
     }
 
