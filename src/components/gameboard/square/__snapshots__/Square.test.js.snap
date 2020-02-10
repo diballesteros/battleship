@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Square component Ocean Square initialized 1`] = `
+<DocumentFragment>
+  <div
+    class="square ocean-square"
+  />
+</DocumentFragment>
+`;
+
+exports[`Square component Ship Square initialized 1`] = `
+<DocumentFragment>
+  <div
+    class="square ocean-square"
+  />
+</DocumentFragment>
+`;
