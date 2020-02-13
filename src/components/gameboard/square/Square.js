@@ -4,9 +4,9 @@ import './Square.css';
 const Square = (props) => {
     switch (props.type) {
         case "ship":
-            return <div onClick={props.hitHandler} className="square ship-square">{props.hit ? 'X' : ''}</div>
+            return <div onClick={props.receiveAttack} className="square ship-square" data-testid={props.id}>{props.hit ? 'X' : ''}</div>
         default:
-            return <div onClick={props.hitHandler} className="square ocean-square">{props.hit ? 'X' : ''}</div>
+            return <div onClick={props.receiveAttack} className="square ocean-square">{props.hit ? 'X' : ''}</div>
     }
 }
 

@@ -10,42 +10,15 @@ exports[`Gameboard component Initialized board 1`] = `
     />
     <div
       class="square ship-square"
+      data-testid="1"
     />
     <div
       class="square ship-square"
+      data-testid="1"
     />
     <div
       class="square ship-square"
-    />
-    <div
-      class="square ocean-square"
-    />
-    <div
-      class="square ocean-square"
-    />
-    <div
-      class="square ocean-square"
-    />
-    <div
-      class="square ocean-square"
-    />
-    <div
-      class="square ocean-square"
-    />
-    <div
-      class="square ship-square"
-    />
-    <div
-      class="square ocean-square"
-    />
-    <div
-      class="square ocean-square"
-    />
-    <div
-      class="square ocean-square"
-    />
-    <div
-      class="square ocean-square"
+      data-testid="1"
     />
     <div
       class="square ocean-square"
@@ -64,6 +37,7 @@ exports[`Gameboard component Initialized board 1`] = `
     />
     <div
       class="square ship-square"
+      data-testid="2"
     />
     <div
       class="square ocean-square"
@@ -94,6 +68,38 @@ exports[`Gameboard component Initialized board 1`] = `
     />
     <div
       class="square ship-square"
+      data-testid="2"
+    />
+    <div
+      class="square ocean-square"
+    />
+    <div
+      class="square ocean-square"
+    />
+    <div
+      class="square ocean-square"
+    />
+    <div
+      class="square ocean-square"
+    />
+    <div
+      class="square ocean-square"
+    />
+    <div
+      class="square ocean-square"
+    />
+    <div
+      class="square ocean-square"
+    />
+    <div
+      class="square ocean-square"
+    />
+    <div
+      class="square ocean-square"
+    />
+    <div
+      class="square ship-square"
+      data-testid="2"
     />
     <div
       class="square ocean-square"

@@ -30,17 +30,17 @@ class Gameboard extends Component {
     }
   }
 
-  updateBoard(i) {
+  receiveAttack(i) {
     const modifiedBoard = this.state.board.slice();
-    const testShip = {
-      hit: true,
-      position: i,
-      type: 'ship'
+    if (!modifiedBoard[i].hit) {
+      modifiedBoard[i].hit = true;
+      if (modifiedBoard[i].type === 'ship') {
+        this.props.hitHandler(modifiedBoard[i].id, i);
+      }
+      this.setState({
+        board: modifiedBoard
+      });
     }
-    modifiedBoard[i] = testShip;
-    this.setState({
-      board: modifiedBoard
-    });
   }
 
   render() {
@@ -51,7 +51,8 @@ class Gameboard extends Component {
             key={i}
             type={this.state.board[i].type}
             hit={this.state.board[i].hit}
-            hitHandler={() => this.updateBoard(i)}>
+            id={this.state.board[i].id}
+            receiveAttack={() => this.receiveAttack(i)}>
           </Square>)}
       </div>
     );
