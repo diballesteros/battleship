@@ -1,60 +1,48 @@
 import React, { Component } from 'react';
-import Gameboard from '../gameboard/Gameboard';
+import PlayerView from '../playerview/PlayerView';
+
+import _ from 'lodash';
 
 class Game extends Component {
     constructor(props) {
         super(props);
-
+        const computerMoves = [...Array(100).keys()];
         this.state = {
-            players: [
-                {
-                    name: 'Diego',
-                    shipsLeft: 1
-                },
-                {
-                    name: 'Computer',
-                    shipsLeft: 1
-                }
-            ],
-            ships: [
-                {
-                    id: 1,
-                    positions: [1,2,3],
-                    hits: [false, false, false]
-                },
-                {
-                    id: 2,
-                    positions: [9,19,29],
-                    hits: [false, false, false]
-                }
-            ]
+            playerTurn: true,
+            computerMoves: computerMoves
         }
     }
 
-    hitHandler(id, hitLocation) {
-        const modifiedShips = this.state.ships.slice();
-        const shipIndex = modifiedShips.findIndex(ship => ship.id === id);
-        const hitIndex = modifiedShips[shipIndex].positions.indexOf(hitLocation);
-        modifiedShips[shipIndex].hits[hitIndex] = true;
-        this.isSunk(modifiedShips[shipIndex].hits);
+    turnHandler () {
         this.setState({
-            ships: modifiedShips
-        });
-    }
+            playerTurn: !this.state.playerTurn
+        })
+    };
 
-    isSunk(positions) {
-        const sunkStatus = positions.every(position => position === true);
-        sunkStatus && console.log('You sunk my battleship!');
-        return sunkStatus;
+    removeComputerMove(i) {
+        const modifiedComputerMoves = this.state.computerMoves.slice();
+        modifiedComputerMoves.splice(i, 1);
+        this.setState({
+            computerMoves: modifiedComputerMoves
+        })
+    };
+
+    performComputerMove() {
+        const nextMove = _.sample(this.state.computerMoves);
+        this.removeComputerMove(nextMove);
+        return nextMove;
     }
 
     render() {
         return (
             <div>
-                <Gameboard ships={this.state.ships} hitHandler={(id, hitLocation) => this.hitHandler(id, hitLocation)}/>
+                <PlayerView
+                    myTurn={this.state.playerTurn} 
+                    turnHandler={() => this.turnHandler()}
+                    performComputerMove={() => this.performComputerMove()}/>
             </div>
         );
-    }
+    };
 }
 
 export default Game;

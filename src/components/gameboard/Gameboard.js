@@ -1,62 +1,48 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Gameboard.css';
 
 import Square from './square/Square';
 
-class Gameboard extends Component {
-  constructor(props) {
-    super(props);
-    const initialBoard = new Array(100);
-    for (var i = 0; i < 100; i++) {
-      initialBoard[i] = {
-        hit: false,
-        position: i,
-        type: 'ocean',
-        id: null
-      };
-    };
-    this.props.ships.forEach(ship => {
-      ship.positions.forEach(coordinate => {
-        initialBoard[coordinate] = {
-          hit: false,
-          position: coordinate,
-          type: 'ship',
-          id: ship.id
-        }
-      })
-    });
-    this.state = {
-      board: initialBoard
-    }
+function showShip(type, isHit) {
+  if (type === 'ship' && isHit === true) {
+    return 'ship'
+  } else {
+    return 'ocean'
   }
+};
 
-  receiveAttack(i) {
-    const modifiedBoard = this.state.board.slice();
-    if (!modifiedBoard[i].hit) {
-      modifiedBoard[i].hit = true;
-      if (modifiedBoard[i].type === 'ship') {
-        this.props.hitHandler(modifiedBoard[i].id, i);
+const Gameboard = (props) => {
+  props.ships.forEach(ship => {
+    ship.positions.forEach((coordinate, index) => {
+      props.board[coordinate] = {
+        hit: ship.hits[index],
+        position: coordinate,
+        type: 'ship',
+        id: ship.id
       }
-      this.setState({
-        board: modifiedBoard
-      });
-    }
-  }
+    })
+  });
 
-  render() {
-    return (
-      <div className='board'>
-        {this.state.board.map((square, i) =>
+  return (
+    <div className='board'>
+      {props.myBoard ? props.board.map((square, i) =>
+        <Square
+          key={i}
+          type={props.board[i].type}
+          hit={props.board[i].hit}
+          id={props.board[i].id}
+          myBoard={props.myBoard}>
+        </Square>)
+        : props.board.map((square, i) =>
           <Square
             key={i}
-            type={this.state.board[i].type}
-            hit={this.state.board[i].hit}
-            id={this.state.board[i].id}
-            receiveAttack={() => this.receiveAttack(i)}>
+            type={showShip(props.board[i].type, props.board[i].hit)}
+            hit={props.board[i].hit}
+            id={props.board[i].id}
+            receiveAttack={() => props.receiveAttack(i)}>
           </Square>)}
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Gameboard;

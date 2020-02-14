@@ -6,6 +6,9 @@
     text-align: center;
     cursor: pointer;
 }
+.my_square {
+    cursor: default;
+}
 
 .ocean-square {
     background-color: skyblue;

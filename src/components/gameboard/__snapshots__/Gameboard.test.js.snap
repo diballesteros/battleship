@@ -6,310 +6,310 @@ exports[`Gameboard component Initialized board 1`] = `
     class="board"
   >
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ship-square"
+      class="square ship-square my_square"
       data-testid="1"
     />
     <div
-      class="square ship-square"
+      class="square ship-square my_square"
       data-testid="1"
     />
     <div
-      class="square ship-square"
+      class="square ship-square my_square"
       data-testid="1"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ship-square"
+      class="square ship-square my_square"
       data-testid="2"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ship-square"
+      class="square ship-square my_square"
       data-testid="2"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ship-square"
+      class="square ship-square my_square"
       data-testid="2"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
     <div
-      class="square ocean-square"
+      class="square ocean-square my_square"
     />
   </div>
 </DocumentFragment>
