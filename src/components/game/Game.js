@@ -8,20 +8,14 @@ class Game extends Component {
         super(props);
         const computerMoves = [...Array(100).keys()];
         this.state = {
-            playerTurn: true,
             computerMoves: computerMoves
         }
     }
 
-    turnHandler () {
-        this.setState({
-            playerTurn: !this.state.playerTurn
-        })
-    };
-
     removeComputerMove(i) {
         const modifiedComputerMoves = this.state.computerMoves.slice();
-        modifiedComputerMoves.splice(i, 1);
+        const computerHitIndex = this.state.computerMoves.findIndex(move => move === i);   
+        modifiedComputerMoves.splice(computerHitIndex, 1);
         this.setState({
             computerMoves: modifiedComputerMoves
         })
@@ -36,10 +30,7 @@ class Game extends Component {
     render() {
         return (
             <div>
-                <PlayerView
-                    myTurn={this.state.playerTurn} 
-                    turnHandler={() => this.turnHandler()}
-                    performComputerMove={() => this.performComputerMove()}/>
+                <PlayerView performComputerMove={() => this.performComputerMove()}/>
             </div>
         );
     };

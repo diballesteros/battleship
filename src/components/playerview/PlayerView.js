@@ -1,79 +1,80 @@
 import React, { Component } from 'react';
 import Gameboard from '../gameboard/Gameboard';
-
-import _ from 'lodash';
-
 import './PlayerView.css';
+
+function createInitialBoard() {
+    const initialBoard = new Array(100);
+    for (var i = 0; i < 100; i++) {
+        initialBoard[i] = {
+            hit: false,
+            position: i,
+            type: 'ocean',
+            id: null
+        };
+    };
+    return initialBoard;
+}
 
 class PlayerView extends Component {
     constructor(props) {
         super(props);
-        const initialBoard = new Array(100);
-        for (var i = 0; i < 100; i++) {
-            initialBoard[i] = {
-                hit: false,
-                position: i,
-                type: 'ocean',
-                id: null
-            };
-        };
         this.state = {
             ships: [
                 {
-                    id: 1,
+                    id: 0,
                     positions: [1, 2, 3],
                     hits: [false, false, false]
                 },
                 {
-                    id: 2,
+                    id: 1,
                     positions: [9, 19, 29],
                     hits: [false, false, false]
                 },
                 {
-                    id: 3,
+                    id: 2,
                     positions: [42, 43, 44, 45, 46],
                     hits: [false, false, false, false, false]
                 },
                 {
-                    id: 4,
+                    id: 3,
                     positions: [98, 99],
                     hits: [false, false]
                 },
                 {
-                    id: 5,
+                    id: 4,
                     positions: [62, 72, 82, 92],
                     hits: [false, false, false, false]
                 }
             ],
             computerShips: [
                 {
-                    id: 1,
+                    id: 0,
                     positions: [1, 2, 3],
                     hits: [false, false, false]
                 },
                 {
-                    id: 2,
+                    id: 1,
                     positions: [9, 19, 29],
                     hits: [false, false, false]
                 },
                 {
-                    id: 3,
+                    id: 2,
                     positions: [42, 43, 44, 45, 46],
                     hits: [false, false, false, false, false]
                 },
                 {
-                    id: 4,
+                    id: 3,
                     positions: [98, 99],
                     hits: [false, false]
                 },
                 {
-                    id: 5,
+                    id: 4,
                     positions: [62, 72, 82, 92],
                     hits: [false, false, false, false]
                 }
             ],
-            playerBoard: initialBoard,
-            computerBoard: _.cloneDeep(initialBoard)
+            playerBoard: createInitialBoard(),
+            computerBoard: createInitialBoard()
         }
     }
 
@@ -84,32 +85,32 @@ class PlayerView extends Component {
     }
 
     receiveAttack(i) {
-        const modifiedBoard = this.props.myTurn ? this.state.computerBoard.slice() : this.state.playerBoard.slice();
-        const modifiedShips = this.props.myTurn ? this.state.computerShips.slice() : this.state.ships.slice();
-        debugger;
-        if (!modifiedBoard[i].hit) {
-            modifiedBoard[i].hit = true;
-            if (modifiedBoard[i].type === 'ship') {
-                const shipIndex = modifiedShips.findIndex(ship => ship.id === modifiedBoard[i].id);
-                const hitIndex = modifiedShips[shipIndex].positions.indexOf(i);
-                modifiedShips[shipIndex].hits[hitIndex] = true;
-                this.isSunk(modifiedShips[shipIndex].hits);
+        if (!this.state.computerBoard[i].hit) {
+            const modifiedPlayerBoard = this.state.playerBoard.slice();
+            const modifiedPlayerShips = this.state.ships.slice();
+            const modifiedComputerShips = this.state.computerShips.slice();
+            const modifiedComputerBoard = this.state.computerBoard.slice();
+            const computerMove = this.props.performComputerMove();
+            modifiedPlayerBoard[computerMove].hit = true;
+            modifiedComputerBoard[i].hit = true;
+            if (modifiedComputerBoard[i].type === 'ship') {
+                const shipIndex = modifiedComputerShips.findIndex(ship => ship.id === modifiedComputerBoard[i].id);
+                const hitIndex = modifiedComputerShips[shipIndex].positions.indexOf(i);
+                modifiedComputerShips[shipIndex].hits[hitIndex] = true;
+                this.isSunk(modifiedComputerShips[shipIndex].hits);
             }
-            this.props.turnHandler();
-            if (this.props.myTurn) {
-                this.setState({
-                    computerBoard: modifiedBoard,
-                    computerShips: modifiedShips
-                });
-            } else {
-                this.setState({
-                    board: modifiedBoard,
-                    ships: modifiedShips
-                });
+            if (modifiedPlayerBoard[computerMove].type === 'ship') {
+                const shipIndex = modifiedPlayerShips.findIndex(ship => ship.id === modifiedPlayerBoard[computerMove].id);
+                const hitIndex = modifiedPlayerShips[shipIndex].positions.indexOf(computerMove);
+                modifiedPlayerShips[shipIndex].hits[hitIndex] = true;
+                this.isSunk(modifiedPlayerShips[shipIndex].hits);
             }
-            if (!this.props.myTurn) {
-                this.receiveAttack(this.props.performComputerMove());
-            }
+            this.setState({
+                computerBoard: modifiedComputerBoard,
+                computerShips: modifiedComputerShips,
+                board: modifiedPlayerBoard,
+                ships: modifiedPlayerShips
+            });
         }
     };
 
@@ -124,7 +125,7 @@ class PlayerView extends Component {
                         recieveAttack={(i) => this.receiveAttack(i)}
                         board={this.state.playerBoard} />
                 </div>
-                <div className='player_board'>
+                <div data-testid="1" className='player_board'>
                     <label>Opponent's Board</label>
                     <Gameboard
                         ships={this.state.computerShips}
