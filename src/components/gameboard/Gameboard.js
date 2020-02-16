@@ -24,27 +24,35 @@ const showShip = (type, isHit) => {
   }
 };
 
-const Gameboard = (props) => {
+const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computerMove, computerCallback, receivePlayerAttack }) => {
   const [board, setBoard] = useState(createInitialBoard());
-  const [computerMove, setComputerMove] = useState(props.computerMove)
 
-  useEffect(() => { 
-    
-  }, [computerMove]);
+  useEffect(() => {
+    if (computerTurn === true && computerMove && resolveComputerTurn) {
+      const modifiedBoard = board.slice();
+      modifiedBoard[computerMove].hit = true;
+      setBoard(modifiedBoard);
+      return resolveComputerTurn(modifiedBoard[computerMove].id);
+    }
+  }, [computerTurn, resolveComputerTurn, computerMove, board, setBoard]);
 
   function resolveBoardClick(playerMove) {
     if (!board[playerMove].hit) {
       const modifiedBoard = board.slice();
       modifiedBoard[playerMove].hit = true;
       setBoard(modifiedBoard);
-  
+
       if (board[playerMove].type === 'ship') {
-        props.receiveAttack(board[playerMove].id, playerMove);
+        receivePlayerAttack(board[playerMove].id, playerMove);
+      }
+
+      if (computerCallback) {
+        computerCallback();
       }
     }
   };
 
-  props.ships.forEach(ship => {
+  ships.forEach(ship => {
     ship.positions.forEach((coordinate, index) => {
       board[coordinate] = {
         hit: ship.hits[index],
@@ -57,12 +65,12 @@ const Gameboard = (props) => {
 
   return (
     <div className='board'>
-      {props.myBoard ? board.map((square, i) =>
+      {myBoard ? board.map((square, i) =>
         <Square
           key={i}
           type={board[i].type}
           hit={board[i].hit}
-          myBoard={props.myBoard}>
+          myBoard={myBoard}>
         </Square>)
         : board.map((square, i) =>
           <Square

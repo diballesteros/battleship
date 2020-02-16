@@ -7,9 +7,8 @@ import _ from 'lodash';
 class Game extends Component {
     constructor(props) {
         super(props);
-        const computerMoves = [...Array(100).keys()];
         this.state = {
-            computerMoves: computerMoves
+            computerMoves: [...Array(100).keys()]
         }
     }
 

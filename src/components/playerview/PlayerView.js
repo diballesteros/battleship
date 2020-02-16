@@ -60,7 +60,8 @@ class PlayerView extends Component {
                     hits: [false, false, false, false]
                 }
             ],
-            computerMove: false
+            computerMove: null, 
+            computerTurn: false
         }
     }
 
@@ -79,21 +80,30 @@ class PlayerView extends Component {
         return ships
     };
 
-    receiveAttack(shipId, playerMove) {
-        // const modifiedPlayerShips = this.state.playerShips.slice();
-        // const computerMove = this.props.getComputerMove();
-
+    receivePlayerAttack(shipId, playerMove) {
         const modifiedComputerShips = this.resolveBoardState(playerMove, shipId, this.state.computerShips.slice());
-        // const playerState = this.resolveBoardState(computerMove, modifiedPlayerShips);
-
         this.setState({
             computerShips: modifiedComputerShips
-            // ships: playerState[1]
         });
-};
+    };
 
-    performComputerMove () {
-        console.log('test');
+    computerCallback() {
+        const computerMove = this.props.getComputerMove();
+        this.setState({
+            computerTurn: true,
+            computerMove: computerMove
+        });
+    };
+
+    resolveComputerTurn(shipId) {
+        let modifiedPlayerShips = this.state.playerShips.slice(); 
+        if (shipId) {
+           modifiedPlayerShips = this.resolveBoardState(this.state.computerMove, shipId, modifiedPlayerShips);
+        }
+        this.setState({
+            computerTurn: false,
+            playerShips: modifiedPlayerShips
+        });
     }
 
     render() {
@@ -103,15 +113,18 @@ class PlayerView extends Component {
                     <label>My Board</label>
                     <Gameboard
                         ships={this.state.playerShips}
-                        myBoard={true} />
+                        myBoard={true}
+                        computerTurn={this.state.computerTurn}
+                        computerMove={this.state.computerMove}
+                        resolveComputerTurn={(shipId) => this.resolveComputerTurn(shipId)} />
                 </div>
                 <div data-testid='1' className='player_board'>
                     <label>Opponent's Board</label>
                     <Gameboard
                         ships={this.state.computerShips}
                         myBoard={false}
-                        receiveAttack={(shipId, i) => this.receiveAttack(shipId,i)} 
-                        performComputerMove={() => this.performComputerMove()}/>
+                        receivePlayerAttack={(shipId, i) => this.receivePlayerAttack(shipId, i)}
+                        computerCallback={() => this.computerCallback()} />
                 </div>
             </div>
         );
