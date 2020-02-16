@@ -2,24 +2,11 @@ import React, { Component } from 'react';
 import Gameboard from '../gameboard/Gameboard';
 import './PlayerView.css';
 
-function createInitialBoard() {
-    const initialBoard = new Array(100);
-    for (var i = 0; i < 100; i++) {
-        initialBoard[i] = {
-            hit: false,
-            position: i,
-            type: 'ocean',
-            id: null
-        };
-    };
-    return initialBoard;
-}
-
 class PlayerView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ships: [
+            playerShips: [
                 {
                     id: 0,
                     positions: [1, 2, 3],
@@ -73,8 +60,7 @@ class PlayerView extends Component {
                     hits: [false, false, false, false]
                 }
             ],
-            playerBoard: createInitialBoard(),
-            computerBoard: createInitialBoard()
+            computerMove: false
         }
     }
 
@@ -84,35 +70,31 @@ class PlayerView extends Component {
         return sunkStatus;
     }
 
-    receiveAttack(i) {
-        if (!this.state.computerBoard[i].hit) {
-            const modifiedPlayerBoard = this.state.playerBoard.slice();
-            const modifiedPlayerShips = this.state.ships.slice();
-            const modifiedComputerShips = this.state.computerShips.slice();
-            const modifiedComputerBoard = this.state.computerBoard.slice();
-            const computerMove = this.props.performComputerMove();
-            modifiedPlayerBoard[computerMove].hit = true;
-            modifiedComputerBoard[i].hit = true;
-            if (modifiedComputerBoard[i].type === 'ship') {
-                const shipIndex = modifiedComputerShips.findIndex(ship => ship.id === modifiedComputerBoard[i].id);
-                const hitIndex = modifiedComputerShips[shipIndex].positions.indexOf(i);
-                modifiedComputerShips[shipIndex].hits[hitIndex] = true;
-                this.isSunk(modifiedComputerShips[shipIndex].hits);
-            }
-            if (modifiedPlayerBoard[computerMove].type === 'ship') {
-                const shipIndex = modifiedPlayerShips.findIndex(ship => ship.id === modifiedPlayerBoard[computerMove].id);
-                const hitIndex = modifiedPlayerShips[shipIndex].positions.indexOf(computerMove);
-                modifiedPlayerShips[shipIndex].hits[hitIndex] = true;
-                this.isSunk(modifiedPlayerShips[shipIndex].hits);
-            }
-            this.setState({
-                computerBoard: modifiedComputerBoard,
-                computerShips: modifiedComputerShips,
-                board: modifiedPlayerBoard,
-                ships: modifiedPlayerShips
-            });
-        }
+    resolveBoardState(move, shipId, ships) {
+        const shipIndex = ships.findIndex(ship => ship.id === shipId);
+        const hitIndex = ships[shipIndex].positions.indexOf(move);
+        ships[shipIndex].hits[hitIndex] = true;
+        this.isSunk(ships[shipIndex].hits);
+
+        return ships
     };
+
+    receiveAttack(shipId, playerMove) {
+        // const modifiedPlayerShips = this.state.playerShips.slice();
+        // const computerMove = this.props.getComputerMove();
+
+        const modifiedComputerShips = this.resolveBoardState(playerMove, shipId, this.state.computerShips.slice());
+        // const playerState = this.resolveBoardState(computerMove, modifiedPlayerShips);
+
+        this.setState({
+            computerShips: modifiedComputerShips
+            // ships: playerState[1]
+        });
+};
+
+    performComputerMove () {
+        console.log('test');
+    }
 
     render() {
         return (
@@ -120,19 +102,16 @@ class PlayerView extends Component {
                 <div className='player_board'>
                     <label>My Board</label>
                     <Gameboard
-                        ships={this.state.ships}
-                        myBoard={true}
-                        recieveAttack={(i) => this.receiveAttack(i)}
-                        board={this.state.playerBoard} />
+                        ships={this.state.playerShips}
+                        myBoard={true} />
                 </div>
-                <div data-testid="1" className='player_board'>
+                <div data-testid='1' className='player_board'>
                     <label>Opponent's Board</label>
                     <Gameboard
                         ships={this.state.computerShips}
                         myBoard={false}
-                        receiveAttack={(i) => this.receiveAttack(i)}
-                        board={this.state.computerBoard}
-                    />
+                        receiveAttack={(shipId, i) => this.receiveAttack(shipId,i)} 
+                        performComputerMove={() => this.performComputerMove()}/>
                 </div>
             </div>
         );

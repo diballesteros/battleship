@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Gameboard.css';
 
 import Square from './square/Square';
 
-function showShip(type, isHit) {
+const createInitialBoard = () => {
+  const initialBoard = new Array(100);
+  for (var i = 0; i < 100; i++) {
+    initialBoard[i] = {
+      hit: false,
+      position: i,
+      type: 'ocean',
+      id: null
+    };
+  };
+  return initialBoard;
+}
+
+const showShip = (type, isHit) => {
   if (type === 'ship' && isHit === true) {
     return 'ship'
   } else {
@@ -12,9 +25,28 @@ function showShip(type, isHit) {
 };
 
 const Gameboard = (props) => {
+  const [board, setBoard] = useState(createInitialBoard());
+  const [computerMove, setComputerMove] = useState(props.computerMove)
+
+  useEffect(() => { 
+    
+  }, [computerMove]);
+
+  function resolveBoardClick(playerMove) {
+    if (!board[playerMove].hit) {
+      const modifiedBoard = board.slice();
+      modifiedBoard[playerMove].hit = true;
+      setBoard(modifiedBoard);
+  
+      if (board[playerMove].type === 'ship') {
+        props.receiveAttack(board[playerMove].id, playerMove);
+      }
+    }
+  };
+
   props.ships.forEach(ship => {
     ship.positions.forEach((coordinate, index) => {
-      props.board[coordinate] = {
+      board[coordinate] = {
         hit: ship.hits[index],
         position: coordinate,
         type: 'ship',
@@ -25,21 +57,19 @@ const Gameboard = (props) => {
 
   return (
     <div className='board'>
-      {props.myBoard ? props.board.map((square, i) =>
+      {props.myBoard ? board.map((square, i) =>
         <Square
           key={i}
-          type={props.board[i].type}
-          hit={props.board[i].hit}
-          id={props.board[i].id}
+          type={board[i].type}
+          hit={board[i].hit}
           myBoard={props.myBoard}>
         </Square>)
-        : props.board.map((square, i) =>
+        : board.map((square, i) =>
           <Square
             key={i}
-            type={showShip(props.board[i].type, props.board[i].hit)}
-            hit={props.board[i].hit}
-            id={props.board[i].id}
-            receiveAttack={() => props.receiveAttack(i)}>
+            type={showShip(board[i].type, board[i].hit)}
+            hit={board[i].hit}
+            resolveBoardClick={() => resolveBoardClick(i)}>
           </Square>)}
     </div>
   );

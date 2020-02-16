@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PlayerView from '../playerview/PlayerView';
+import ShipFactory from '../shipfactory/ShipFactory';
 
 import _ from 'lodash';
 
@@ -21,7 +22,7 @@ class Game extends Component {
         })
     };
 
-    performComputerMove() {
+    getComputerMove() {
         const nextMove = _.sample(this.state.computerMoves);
         this.removeComputerMove(nextMove);
         return nextMove;
@@ -30,7 +31,8 @@ class Game extends Component {
     render() {
         return (
             <div>
-                <PlayerView performComputerMove={() => this.performComputerMove()}/>
+                <ShipFactory />
+                <PlayerView getComputerMove={() => this.getComputerMove()}/>
             </div>
         );
     };
