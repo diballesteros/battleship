@@ -1,0 +1,23 @@
+.ship_factory {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.ship_store {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 570px;
+    width: 320px;
+    border: 1px solid black;
+}
+
+.ship_store_title {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-bottom: 15px;
+}
+
+.ship_store_ship {
+    display: flex;
+    flex-flow: row nowrap;
+}

@@ -27,7 +27,7 @@ const showShip = (type, isHit) => {
 const letterRow = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 const numberColumn = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computerMove, computerCallback, receivePlayerAttack, resolveBoardClick }) => {
+const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computerMove, computerCallback, receivePlayerAttack, resolveBoardDrop }) => {
   const [board, setBoard] = useState(createInitialBoard());
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computer
               type={square.type}
               hit={square.hit}
               myBoard={myBoard}
-              resolveSquareClick={resolveBoardClick ? () => resolveBoardClick(i) : null}>
+              resolveBoardDrop={resolveBoardDrop ? () => resolveBoardDrop(i) : null}>
             </Square>)
             : board.map((square, i) =>
               <Square

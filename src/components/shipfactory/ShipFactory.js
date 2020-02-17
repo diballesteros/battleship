@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Gameboard from '../gameboard/Gameboard';
+import Square from '../gameboard/square/Square';
 
 import './ShipFactory.css';
 
@@ -30,10 +31,11 @@ class ShipFactory extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isHorizontal: false,
+            isHorizontal: true,
             currentModel: 0,
             currentShips: [],
-            occupiedSquares: []
+            occupiedSquares: [],
+            isShipBuilt: false
         }
     };
 
@@ -91,10 +93,33 @@ class ShipFactory extends Component {
         });
     };
 
+    onDrag = (event) => {
+        event.preventDefault();
+    }
+
     render() {
         return (
-            <div>
-                <Gameboard ships={this.state.currentShips} myBoard={true} resolveBoardClick={(i) => this.canPlaceShip(i)} />
+            <div className='ship_factory'>
+                <Gameboard ships={this.state.currentShips} myBoard={true} resolveBoardDrop={(i) => this.canPlaceShip(i)} />
+                <div className='ship_store'>
+                    <div className='ship_store_title'>
+                        <label>Place your ships</label>
+                        <span>Instructions</span>
+                    </div>
+                    <div className='ship_store_ship_container'>
+                        {
+                            this.state.isShipBuilt ? <button>Start Game</button> :
+                                <div>
+                                    <label>Model: {shipStore[this.state.currentModel].model}</label>
+                                    <div className='ship_store_ship' draggable onDrag={(event) => this.onDrag(event)}>
+                                        {
+                                            [...Array(shipStore[this.state.currentModel].size)].map((e, i) => <Square key={i} type={'ship'} myBoard={true} />)
+                                        }
+                                    </div>
+                                </div>
+                        }
+                    </div>
+                </div>
             </div>
         );
     };

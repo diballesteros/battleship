@@ -15,7 +15,7 @@ describe('Square component', () => {
 
     test('Ship square hit', () => {
         const mockFn = jest.fn();
-        const { container } = render(<Square type='ship' hit={false} resolveBoardClick={() => mockFn()} />);
+        const { container } = render(<Square type='ship' hit={false} resolveSquareClick={() => mockFn()} />);
         const component = container.querySelector('div');
         fireEvent.click(component);
         expect(mockFn).toHaveBeenCalled();
