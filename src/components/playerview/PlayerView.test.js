@@ -6,7 +6,7 @@ describe('PlayerView Component', () => {
     test('Changing hit status for ships', () => {
         const mockFn = jest.fn();
         mockFn.mockReturnValueOnce(1);
-        const { getByTestId } = render(<PlayerView getComputerMove={() => mockFn()}/>);
+        const { getByTestId } = render(<PlayerView getComputerMove={() => mockFn()} setSuccessfulHit={() => mockFn()} />);
         const component = getByTestId("1").children[1].children[1].children[1].children[1];
         fireEvent.click(component);
         expect(component).toHaveTextContent('X');
@@ -16,7 +16,7 @@ describe('PlayerView Component', () => {
     test('Changing hit status for ocean', () => {
         const mockFn = jest.fn();
         mockFn.mockReturnValueOnce(1);
-        const { getByTestId } = render(<PlayerView getComputerMove={() => mockFn()} />);
+        const { getByTestId } = render(<PlayerView getComputerMove={() => mockFn()} setSuccessfulHit={() => mockFn()} />);
         const component = getByTestId("1").children[1].children[1].children[1].firstChild;
         fireEvent.click(component);
         expect(component).toHaveTextContent('X');

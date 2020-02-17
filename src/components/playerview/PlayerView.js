@@ -8,59 +8,59 @@ class PlayerView extends Component {
         this.state = {
             playerShips: [
                 {
-                    id: 0,
+                    id: 1,
                     positions: [1, 2, 3],
                     hits: [false, false, false]
                 },
                 {
-                    id: 1,
+                    id: 2,
                     positions: [9, 19, 29],
                     hits: [false, false, false]
                 },
                 {
-                    id: 2,
+                    id: 3,
                     positions: [42, 43, 44, 45, 46],
                     hits: [false, false, false, false, false]
                 },
                 {
-                    id: 3,
+                    id: 4,
                     positions: [98, 99],
                     hits: [false, false]
                 },
                 {
-                    id: 4,
+                    id: 5,
                     positions: [62, 72, 82, 92],
                     hits: [false, false, false, false]
                 }
             ],
             computerShips: [
                 {
-                    id: 0,
+                    id: 1,
                     positions: [1, 2, 3],
                     hits: [false, false, false]
                 },
                 {
-                    id: 1,
+                    id: 2,
                     positions: [9, 19, 29],
                     hits: [false, false, false]
                 },
                 {
-                    id: 2,
+                    id: 3,
                     positions: [42, 43, 44, 45, 46],
                     hits: [false, false, false, false, false]
                 },
                 {
-                    id: 3,
+                    id: 4,
                     positions: [98, 99],
                     hits: [false, false]
                 },
                 {
-                    id: 4,
+                    id: 5,
                     positions: [62, 72, 82, 92],
                     hits: [false, false, false, false]
                 }
             ],
-            computerMove: null, 
+            computerMove: null,
             computerTurn: false
         }
     }
@@ -68,6 +68,9 @@ class PlayerView extends Component {
     isSunk(positions) {
         const sunkStatus = positions.every(position => position === true);
         sunkStatus && console.log('You sunk my battleship!');
+        if (sunkStatus && this.state.computerTurn === true) {
+            this.props.resetSuccessfulHit();
+        }
         return sunkStatus;
     }
 
@@ -96,9 +99,10 @@ class PlayerView extends Component {
     };
 
     resolveComputerTurn(shipId) {
-        let modifiedPlayerShips = this.state.playerShips.slice(); 
+        let modifiedPlayerShips = this.state.playerShips.slice();
         if (shipId) {
-           modifiedPlayerShips = this.resolveBoardState(this.state.computerMove, shipId, modifiedPlayerShips);
+            this.props.setSuccessfulHit(this.state.computerMove);
+            modifiedPlayerShips = this.resolveBoardState(this.state.computerMove, shipId, modifiedPlayerShips);
         }
         this.setState({
             computerTurn: false,
