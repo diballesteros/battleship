@@ -1,19 +1,28 @@
 .square {
     width: 50px;
     height: 50px;
-    border: 1px solid;
+    border: 1px solid black;
     font-size: 32px;
     text-align: center;
     cursor: pointer;
 }
+
 .my_square {
     cursor: default;
 }
 
 .ocean-square {
     background-color: skyblue;
+    color: black;
 }
+
 .ship-square {
     background-color: grey;
+    color: red;
+}
+
+.grid-square {
+    background-color: beige;
+    cursor: default;
 }
 

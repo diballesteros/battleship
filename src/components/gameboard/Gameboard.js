@@ -24,6 +24,9 @@ const showShip = (type, isHit) => {
   }
 };
 
+const letterRow = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+const numberColumn = [...Array(10).keys()]
+
 const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computerMove, computerCallback, receivePlayerAttack }) => {
   const [board, setBoard] = useState(createInitialBoard());
 
@@ -64,22 +67,43 @@ const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computer
   });
 
   return (
-    <div className='board'>
-      {myBoard ? board.map((square, i) =>
-        <Square
-          key={i}
-          type={board[i].type}
-          hit={board[i].hit}
-          myBoard={myBoard}>
-        </Square>)
-        : board.map((square, i) =>
+    <div>
+      <div className="letter_row">
+        {letterRow.map((value, i) => 
           <Square
             key={i}
-            type={showShip(board[i].type, board[i].hit)}
-            hit={board[i].hit}
-            resolveBoardClick={() => resolveBoardClick(i)}>
+            text={value}
+            type='grid'>
           </Square>)}
+      </div>
+      <div className="lower_section">
+        <div className="number_column">
+          {numberColumn.map((value, i) => 
+          <Square
+            key={i}
+            text={value}
+            type='grid'>
+            </Square>)}
+        </div>
+        <div className='board'>
+          {myBoard ? board.map((square, i) =>
+            <Square
+              key={i}
+              type={square.type}
+              hit={square.hit}
+              myBoard={myBoard}>
+            </Square>)
+            : board.map((square, i) =>
+              <Square
+                key={i}
+                type={showShip(square.type, square.hit)}
+                hit={square.hit}
+                resolveBoardClick={() => resolveBoardClick(i)}>
+              </Square>)}
+        </div>
+      </div>
     </div>
+
   );
 }
 

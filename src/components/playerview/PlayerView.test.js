@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, getAllByText } from '@testing-library/react';
 import PlayerView from './PlayerView';
 
 describe('PlayerView Component', () => {
@@ -7,7 +7,7 @@ describe('PlayerView Component', () => {
         const mockFn = jest.fn();
         mockFn.mockReturnValueOnce(1);
         const { getByTestId } = render(<PlayerView getComputerMove={() => mockFn()}/>);
-        const component = getByTestId("1").children[1].children[1];
+        const component = getByTestId("1").children[1].children[1].children[1].children[1];
         fireEvent.click(component);
         expect(component).toHaveTextContent('X');
         expect(component.classList.contains('ship-square')).toBeTruthy();
@@ -17,7 +17,7 @@ describe('PlayerView Component', () => {
         const mockFn = jest.fn();
         mockFn.mockReturnValueOnce(1);
         const { getByTestId } = render(<PlayerView getComputerMove={() => mockFn()} />);
-        const component = getByTestId("1").children[1].firstChild;
+        const component = getByTestId("1").children[1].children[1].children[1].firstChild;
         fireEvent.click(component);
         expect(component).toHaveTextContent('X');
         expect(component.classList.contains('ocean-square')).toBeTruthy();

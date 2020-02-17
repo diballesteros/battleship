@@ -30,7 +30,6 @@ class Game extends Component {
     render() {
         return (
             <div>
-                <ShipFactory />
                 <PlayerView getComputerMove={() => this.getComputerMove()}/>
             </div>
         );

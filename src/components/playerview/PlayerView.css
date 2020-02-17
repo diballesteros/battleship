@@ -9,3 +9,8 @@
     flex-flow: column nowrap;
     align-items: center;
 }
+
+label {
+    font-size: 24px;
+    margin: 10px;
+}
