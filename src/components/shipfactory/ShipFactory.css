@@ -14,10 +14,45 @@
 .ship_store_title {
     display: flex;
     flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 15px;
+}
+
+.ship_store_ship_container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.ship_store_model {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.ship_store_model img {
+    margin: 10px;
 }
 
 .ship_store_ship {
     display: flex;
+    height: 260px;
+    width: 260px;
+    justify-content: center;
+    align-items: center;
+}
+
+.ship_store_ship.horizontal {
     flex-flow: row nowrap;
+}
+
+.ship_store_ship.vertical {
+    flex-flow: column nowrap;
+}
+
+.ship_store_undo {
+    display: flex;
+    flex-flow: row nowrap;
+    position: relative;
+    top: 50px;
 }

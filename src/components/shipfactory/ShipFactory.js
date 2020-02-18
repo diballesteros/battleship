@@ -3,6 +3,8 @@ import Gameboard from '../gameboard/Gameboard';
 import Square from '../gameboard/square/Square';
 
 import './ShipFactory.css';
+import rotate from './rotate.png';
+import undo from './undo.png';
 
 const shipStore = [
     {
@@ -34,8 +36,7 @@ class ShipFactory extends Component {
             isHorizontal: true,
             currentModel: 0,
             currentShips: [],
-            occupiedSquares: [],
-            isShipBuilt: false
+            occupiedSquares: []
         }
     };
 
@@ -97,6 +98,12 @@ class ShipFactory extends Component {
         event.preventDefault();
     }
 
+    flipShip() {
+        this.setState({
+            isHorizontal: !this.state.isHorizontal
+        });
+    }
+
     render() {
         return (
             <div className='ship_factory'>
@@ -106,19 +113,25 @@ class ShipFactory extends Component {
                         <label>Place your ships</label>
                         <span>Instructions</span>
                     </div>
-                    <div className='ship_store_ship_container'>
-                        {
-                            this.state.isShipBuilt ? <button>Start Game</button> :
-                                <div>
+                    {
+                        this.state.currentModel === 5 ? <button>Start Game</button> :
+                            <div className='ship_store_ship_container'>
+                                <div className='ship_store_model'>
                                     <label>Model: {shipStore[this.state.currentModel].model}</label>
-                                    <div className='ship_store_ship' draggable onDrag={(event) => this.onDrag(event)}>
-                                        {
-                                            [...Array(shipStore[this.state.currentModel].size)].map((e, i) => <Square key={i} type={'ship'} myBoard={true} />)
-                                        }
-                                    </div>
+                                    <div onClick={() => this.flipShip()}><img alt='rotate' src={rotate}/></div>
                                 </div>
-                        }
-                    </div>
+                                <div className={`ship_store_ship ${this.state.isHorizontal ? 'horizontal' : 'vertical'}`} draggable onDrag={(event) => this.onDrag(event)}>
+                                    {
+                                        [...Array(shipStore[this.state.currentModel].size)].map((e, i) => <Square key={i} type={'ship'} myBoard={true} />)
+                                    }
+                                </div>
+                                <div className='ship_store_undo'>
+                                    <button>Undo</button>
+                                    <img alt='undo' src={undo}/>
+                                </div>
+                               
+                            </div>
+                    }
                 </div>
             </div>
         );
