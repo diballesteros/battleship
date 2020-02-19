@@ -120,7 +120,8 @@ class PlayerView extends Component {
                         myBoard={true}
                         computerTurn={this.state.computerTurn}
                         computerMove={this.state.computerMove}
-                        resolveComputerTurn={(shipId) => this.resolveComputerTurn(shipId)} />
+                        resolveComputerTurn={(shipId) => this.resolveComputerTurn(shipId)} 
+                        origin={'Player'}/>
                 </div>
                 <div data-testid='1' className='player_board'>
                     <label>Opponent's Board</label>
@@ -128,7 +129,8 @@ class PlayerView extends Component {
                         ships={this.state.computerShips}
                         myBoard={false}
                         receivePlayerAttack={(shipId, i) => this.receivePlayerAttack(shipId, i)}
-                        computerCallback={() => this.computerCallback()} />
+                        computerCallback={() => this.computerCallback()} 
+                        origin={'Opponent'}/>
                 </div>
             </div>
         );

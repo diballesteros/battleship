@@ -49,10 +49,3 @@
 .ship_store_ship.vertical {
     flex-flow: column nowrap;
 }
-
-.ship_store_undo {
-    display: flex;
-    flex-flow: row nowrap;
-    position: relative;
-    top: 50px;
-}

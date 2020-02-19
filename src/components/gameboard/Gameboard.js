@@ -24,6 +24,29 @@ const showShip = (type, isHit) => {
   }
 };
 
+const removeNonexistantShips = (board, ships) => {
+  let countOfShips = 0;
+  for (let i = 0; i < 5; i++) {
+    if (_.some(board, (square) => {
+      return square.id === i;
+    })) {
+      countOfShips++;
+    }
+  }
+  if (countOfShips > ships.length) {
+    board.forEach(function(square, ind) {
+      if(square.id === countOfShips) {
+        board[ind] = {
+          hit: false,
+          position: ind,
+          type: 'ocean',
+          id: null
+        }
+      }
+    });
+  }
+}
+
 const letterRow = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 const numberColumn = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
@@ -55,6 +78,10 @@ const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computer
     }
   };
 
+  if (resolveBoardDrop) {
+    removeNonexistantShips(board, ships);
+  }
+
   ships.forEach(ship => {
     ship.positions.forEach((coordinate, index) => {
       board[coordinate] = {
@@ -66,10 +93,15 @@ const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computer
     })
   });
 
+//Iterate through everysquare if the number of ships is different and remove the ship squares that pertain to removed ship
+  board.forEach(square => {
+
+  });
+
   return (
     <div>
       <div className='letter_row'>
-        {letterRow.map((value, i) => 
+        {letterRow.map((value, i) =>
           <Square
             key={i}
             text={value}
@@ -78,17 +110,17 @@ const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computer
       </div>
       <div className='lower_section'>
         <div className='number_column'>
-          {numberColumn.map((value, i) => 
-          <Square
-            key={i}
-            text={value}
-            type='grid'>
+          {numberColumn.map((value, i) =>
+            <Square
+              key={i}
+              text={value}
+              type='grid'>
             </Square>)}
         </div>
         <div className='board'>
           {myBoard ? board.map((square, i) =>
             <Square
-              key={i}
+              key={origin + i}
               type={square.type}
               hit={square.hit}
               myBoard={myBoard}
@@ -96,7 +128,7 @@ const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computer
             </Square>)
             : board.map((square, i) =>
               <Square
-                key={i}
+                key={origin + i}
                 type={showShip(square.type, square.hit)}
                 hit={square.hit}
                 resolveSquareClick={() => resolveSquareClick(i)}>

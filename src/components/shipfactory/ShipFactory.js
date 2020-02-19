@@ -4,7 +4,6 @@ import Square from '../gameboard/square/Square';
 
 import './ShipFactory.css';
 import rotate from './rotate.png';
-import undo from './undo.png';
 
 const shipStore = [
     {
@@ -96,18 +95,18 @@ class ShipFactory extends Component {
 
     onDrag = (event) => {
         event.preventDefault();
-    }
+    };
 
     flipShip() {
         this.setState({
             isHorizontal: !this.state.isHorizontal
         });
-    }
+    };
 
     render() {
         return (
             <div className='ship_factory'>
-                <Gameboard ships={this.state.currentShips} myBoard={true} resolveBoardDrop={(i) => this.canPlaceShip(i)} />
+                <Gameboard ships={this.state.currentShips} myBoard={true} resolveBoardDrop={(i) => this.canPlaceShip(i)} origin={'ShipFactory'}/>
                 <div className='ship_store'>
                     <div className='ship_store_title'>
                         <label>Place your ships</label>
@@ -124,10 +123,6 @@ class ShipFactory extends Component {
                                     {
                                         [...Array(shipStore[this.state.currentModel].size)].map((e, i) => <Square key={i} type={'ship'} myBoard={true} />)
                                     }
-                                </div>
-                                <div className='ship_store_undo'>
-                                    <button>Undo</button>
-                                    <img alt='undo' src={undo}/>
                                 </div>
                                
                             </div>
