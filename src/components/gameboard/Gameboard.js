@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Gameboard.css';
-import _ from 'lodash';
 import Square from './square/Square';
 
 const createInitialBoard = () => {
@@ -24,63 +23,15 @@ const showShip = (type, isHit) => {
   }
 };
 
-const removeNonexistantShips = (board, ships) => {
-  let countOfShips = 0;
-  for (let i = 0; i < 5; i++) {
-    if (_.some(board, (square) => {
-      return square.id === i;
-    })) {
-      countOfShips++;
-    }
-  }
-  if (countOfShips > ships.length) {
-    board.forEach(function(square, ind) {
-      if(square.id === countOfShips) {
-        board[ind] = {
-          hit: false,
-          position: ind,
-          type: 'ocean',
-          id: null
-        }
-      }
-    });
-  }
-}
-
 const letterRow = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 const numberColumn = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computerMove, computerCallback, receivePlayerAttack, resolveBoardDrop }) => {
-  const [board, setBoard] = useState(createInitialBoard());
+const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, playerMoves}) => {
+  const board = createInitialBoard();
 
-  useEffect(() => {
-    if (computerTurn === true && _.isNumber(computerMove) && resolveComputerTurn) {
-      const modifiedBoard = board.slice();
-      modifiedBoard[computerMove].hit = true;
-      setBoard(modifiedBoard);
-      return resolveComputerTurn(modifiedBoard[computerMove].id);
-    }
-  }, [computerTurn, resolveComputerTurn, computerMove, board, setBoard]);
-
-  const resolveSquareClick = (playerMove) => {
-    if (!board[playerMove].hit) {
-      const modifiedBoard = board.slice();
-      modifiedBoard[playerMove].hit = true;
-      setBoard(modifiedBoard);
-
-      if (board[playerMove].type === 'ship') {
-        receivePlayerAttack(board[playerMove].id, playerMove);
-      }
-
-      if (computerCallback) {
-        computerCallback();
-      }
-    }
+  const checkForHit = (i) => {
+    return playerMoves.includes(i);
   };
-
-  if (resolveBoardDrop) {
-    removeNonexistantShips(board, ships);
-  }
 
   ships.forEach(ship => {
     ship.positions.forEach((coordinate, index) => {
@@ -91,11 +42,6 @@ const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computer
         id: ship.id
       }
     })
-  });
-
-//Iterate through everysquare if the number of ships is different and remove the ship squares that pertain to removed ship
-  board.forEach(square => {
-
   });
 
   return (
@@ -122,16 +68,16 @@ const Gameboard = ({ ships, myBoard, computerTurn, resolveComputerTurn, computer
             <Square
               key={origin + i}
               type={square.type}
-              hit={square.hit}
+              hit={checkForHit(i)}
               myBoard={myBoard}
               resolveBoardDrop={resolveBoardDrop ? () => resolveBoardDrop(i) : null}>
             </Square>)
             : board.map((square, i) =>
               <Square
                 key={origin + i}
-                type={showShip(square.type, square.hit)}
-                hit={square.hit}
-                resolveSquareClick={() => resolveSquareClick(i)}>
+                type={showShip(square.type, checkForHit(i))}
+                hit={checkForHit(i)}
+                resolveSquareClick={checkForHit(i) ? null : () => receivePlayerAttack(square.id, i)}>
               </Square>)}
         </div>
       </div>

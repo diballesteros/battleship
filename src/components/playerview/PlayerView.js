@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Gameboard from '../gameboard/Gameboard';
+import _ from 'lodash';
 import './PlayerView.css';
 
 class PlayerView extends Component {
@@ -60,54 +61,62 @@ class PlayerView extends Component {
                     hits: [false, false, false, false]
                 }
             ],
-            computerMove: null,
-            computerTurn: false
+            playerMoves: [],
+            computerMoves: []
         }
     }
 
-    isSunk(positions) {
+    isSunk(positions, isComputer) {
         const sunkStatus = positions.every(position => position === true);
         sunkStatus && console.log('You sunk my battleship!');
-        if (sunkStatus && this.state.computerTurn === true) {
+        if (sunkStatus && isComputer === true) {
             this.props.resetSuccessfulHit();
         }
         return sunkStatus;
     }
 
-    resolveBoardState(move, shipId, ships) {
+    resolveBoardState(move, shipId, ships, isComputer) {
         const shipIndex = ships.findIndex(ship => ship.id === shipId);
         const hitIndex = ships[shipIndex].positions.indexOf(move);
         ships[shipIndex].hits[hitIndex] = true;
-        this.isSunk(ships[shipIndex].hits);
-
+        this.isSunk(ships[shipIndex].hits, isComputer);
         return ships
     };
 
     receivePlayerAttack(shipId, playerMove) {
-        const modifiedComputerShips = this.resolveBoardState(playerMove, shipId, this.state.computerShips.slice());
-        this.setState({
-            computerShips: modifiedComputerShips
-        });
-    };
-
-    computerCallback() {
-        const computerMove = this.props.getComputerMove();
-        this.setState({
-            computerTurn: true,
-            computerMove: computerMove
-        });
-    };
-
-    resolveComputerTurn(shipId) {
-        let modifiedPlayerShips = this.state.playerShips.slice();
-        if (shipId) {
-            this.props.setSuccessfulHit(this.state.computerMove);
-            modifiedPlayerShips = this.resolveBoardState(this.state.computerMove, shipId, modifiedPlayerShips);
+        const modifiedPlayerMoves = this.state.playerMoves.slice();
+        modifiedPlayerMoves.push(playerMove);
+        let modifiedComputerShips = this.state.computerShips.slice();
+        if (!_.isNull(shipId)) {
+            modifiedComputerShips = this.resolveBoardState(playerMove, shipId, this.state.computerShips.slice(), false);
         }
+        
+        const modifiedComputerMoves = this.state.computerMoves.slice();
+        const computerMove = this.props.getComputerMove();
+        modifiedComputerMoves.push(computerMove);
+        const modifiedPlayerShips = this.resolveComputerTurn(computerMove);
+
         this.setState({
-            computerTurn: false,
+            computerShips: modifiedComputerShips,
+            playerMoves: modifiedPlayerMoves,
+            computerMoves: modifiedComputerMoves,
             playerShips: modifiedPlayerShips
         });
+    };
+
+    resolveComputerTurn(move) {
+        let modifiedPlayerShips = this.state.playerShips.slice();
+        let foundShip = -1;
+        modifiedPlayerShips.forEach((ship) => {
+            if (ship.positions.includes(move)) {
+                foundShip = ship.id
+            }
+        });
+        if (foundShip > -1) {
+            this.props.setSuccessfulHit(move);
+            modifiedPlayerShips = this.resolveBoardState(move, foundShip, modifiedPlayerShips, true);
+        }
+        return modifiedPlayerShips;
     }
 
     render() {
@@ -118,10 +127,8 @@ class PlayerView extends Component {
                     <Gameboard
                         ships={this.state.playerShips}
                         myBoard={true}
-                        computerTurn={this.state.computerTurn}
-                        computerMove={this.state.computerMove}
-                        resolveComputerTurn={(shipId) => this.resolveComputerTurn(shipId)} 
-                        origin={'Player'}/>
+                        origin={'Player'}
+                        playerMoves={this.state.computerMoves} />
                 </div>
                 <div data-testid='1' className='player_board'>
                     <label>Opponent's Board</label>
@@ -129,8 +136,8 @@ class PlayerView extends Component {
                         ships={this.state.computerShips}
                         myBoard={false}
                         receivePlayerAttack={(shipId, i) => this.receivePlayerAttack(shipId, i)}
-                        computerCallback={() => this.computerCallback()} 
-                        origin={'Opponent'}/>
+                        origin={'Opponent'}
+                        playerMoves={this.state.playerMoves} />
                 </div>
             </div>
         );

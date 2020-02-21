@@ -106,7 +106,7 @@ class ShipFactory extends Component {
     render() {
         return (
             <div className='ship_factory'>
-                <Gameboard ships={this.state.currentShips} myBoard={true} resolveBoardDrop={(i) => this.canPlaceShip(i)} origin={'ShipFactory'}/>
+                <Gameboard ships={this.state.currentShips} myBoard={true} resolveBoardDrop={(i) => this.canPlaceShip(i) } playerMoves={[]} origin={'ShipFactory'}/>
                 <div className='ship_store'>
                     <div className='ship_store_title'>
                         <label>Place your ships</label>
