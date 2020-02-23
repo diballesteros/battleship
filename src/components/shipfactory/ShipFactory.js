@@ -33,14 +33,13 @@ class ShipFactory extends Component {
         super(props);
         this.state = {
             isHorizontal: true,
-            currentModel: 0,
-            currentShips: [],
-            occupiedSquares: []
+            currentShips: []
         }
     };
 
-    canPlaceShip(i) {
-        const units = shipStore[this.state.currentModel].size;
+    canPlaceShip(event, i) {
+        event.target.style.removeProperty('background-color');
+        const units = shipStore[this.state.currentShips.length].size;
         const positions = this.createPositionsArray(i, units);
         if (this.state.isHorizontal) {
             const endOfRow = Math.ceil((i + 1) / 10) * 10;
@@ -56,8 +55,10 @@ class ShipFactory extends Component {
 
     isOccupied(positions) {
         for (let i = 0; i < positions.length; i++) {
-            if (this.state.occupiedSquares.includes(positions[i])) {
-                return true;
+            for (let j = 0; j < this.state.currentShips.length; j++) {
+                if (this.state.currentShips[j].positions.includes(positions[i])) {
+                    return true;
+                }
             }
         }
         return false;
@@ -79,17 +80,14 @@ class ShipFactory extends Component {
 
     buildShip(units, positions) {
         const newShip = {
-            id: this.state.currentModel + 1,
+            id: this.state.currentShips.length + 1,
             positions: positions,
             hits: Array(units).fill(false)
         }
         const modifiedCurrentShips = this.state.currentShips.slice();
         modifiedCurrentShips.push(newShip);
-        const modifiedOccupiedSquares = this.state.occupiedSquares.slice();
         this.setState({
-            currentShips: modifiedCurrentShips,
-            occupiedSquares: modifiedOccupiedSquares.concat(positions),
-            currentModel: this.state.currentModel + 1
+            currentShips: modifiedCurrentShips
         });
     };
 
@@ -97,35 +95,49 @@ class ShipFactory extends Component {
         event.preventDefault();
     };
 
-    flipShip() {
+    rotateShip() {
         this.setState({
             isHorizontal: !this.state.isHorizontal
         });
     };
 
+    undoPlacement() {
+        if (this.state.currentShips.length > 0) {
+            const modifiedCurrentShips = this.state.currentShips.slice();
+            modifiedCurrentShips.pop();
+            this.setState({
+                currentShips: modifiedCurrentShips
+            })
+        }
+    };
+
     render() {
         return (
             <div className='ship_factory'>
-                <Gameboard ships={this.state.currentShips} myBoard={true} resolveBoardDrop={(i) => this.canPlaceShip(i) } playerMoves={[]} origin={'ShipFactory'}/>
+                <Gameboard ships={this.state.currentShips} myBoard={true} resolveBoardDrop={(i) => this.canPlaceShip(i)} playerMoves={[]} origin={'ShipFactory'} />
                 <div className='ship_store'>
                     <div className='ship_store_title'>
-                        <label>Place your ships</label>
-                        <span>Instructions</span>
+                        <label>Arrange your board</label>
+                        <span>Drag and drop the ship below on a square</span>
                     </div>
                     {
-                        this.state.currentModel === 5 ? <button>Start Game</button> :
-                            <div className='ship_store_ship_container'>
-                                <div className='ship_store_model'>
-                                    <label>Model: {shipStore[this.state.currentModel].model}</label>
-                                    <div onClick={() => this.flipShip()}><img alt='rotate' src={rotate}/></div>
-                                </div>
-                                <div className={`ship_store_ship ${this.state.isHorizontal ? 'horizontal' : 'vertical'}`} draggable onDrag={(event) => this.onDrag(event)}>
-                                    {
-                                        [...Array(shipStore[this.state.currentModel].size)].map((e, i) => <Square key={i} type={'ship'} myBoard={true} />)
-                                    }
-                                </div>
-                               
+                        <div className='ship_store_ship_container'>
+                            <div className='ship_store_model'>
+                                <label>Model: {shipStore[this.state.currentShips.length].model}</label>
+                                <div onClick={() => this.rotateShip()}><img alt='rotate' src={rotate} /></div>
                             </div>
+                            <div className={`ship_store_ship ${this.state.isHorizontal ? 'horizontal' : 'vertical'}`} draggable onDrag={(event) => this.onDrag(event)}>
+                                {
+                                    [...Array(shipStore[this.state.currentShips.length].size)].map((e, i) => <Square key={i} type={'ship'} myBoard={true} />)
+                                }
+                            </div>
+                            <div>Ships left: {5 - this.state.currentShips.length}/5</div>
+                            <div>
+                                <button>Start Game</button>
+                                <button>Undo</button>
+                                <button>Reset</button>
+                            </div>
+                        </div>
                     }
                 </div>
             </div>

@@ -70,7 +70,7 @@ const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, play
               type={square.type}
               hit={checkForHit(i)}
               myBoard={myBoard}
-              resolveBoardDrop={resolveBoardDrop ? () => resolveBoardDrop(i) : null}>
+              resolveBoardDrop={resolveBoardDrop ? (event, i) => resolveBoardDrop(event, i) : null}>
             </Square>)
             : board.map((square, i) =>
               <Square
