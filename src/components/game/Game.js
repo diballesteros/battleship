@@ -16,7 +16,7 @@ class Game extends Component {
 
     removeComputerMove(i) {
         const modifiedComputerMoves = this.state.computerMoves.slice();
-        const computerHitIndex = this.state.computerMoves.findIndex(move => move === i);   
+        const computerHitIndex = this.state.computerMoves.findIndex(move => move === i);
         modifiedComputerMoves.splice(computerHitIndex, 1);
         this.setState({
             computerMoves: modifiedComputerMoves
@@ -36,18 +36,51 @@ class Game extends Component {
     };
 
     getAdjacentSquare() {
-        for (let i = this.state.lastSuccessfulMoves.length - 1; i > -1; i--){
-            if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] - 1)) {
-                return (this.state.lastSuccessfulMoves[i] - 1);
-            } else if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] + 1)) {
-                return (this.state.lastSuccessfulMoves[i] + 1);
-            } else if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] + 10)) {
-                return (this.state.lastSuccessfulMoves[i] + 10);
-            } else if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] - 10)) {
-                return (this.state.lastSuccessfulMoves[i] - 10);
+        let square = 0;
+        if (this.state.lastSuccessfulMoves.length >= 2) {
+            if ((this.state.lastSuccessfulMoves[0] + 1 === this.state.lastSuccessfulMoves[1]) || (this.state.lastSuccessfulMoves[0] - 1 === this.state.lastSuccessfulMoves[1])) {
+                for (let i = this.state.lastSuccessfulMoves.length - 1; i > -1; i--) {
+                    square = this.getAdjacentHorizontalSquare(i);
+                    if (square) {
+                        return square;
+                    }
+                }
+            } else {
+                for (let i = this.state.lastSuccessfulMoves.length - 1; i > -1; i--) {
+                    square = this.getAdjacentVerticalSquare(i);
+                    if (square) {
+                        return square;
+                    }
+                }
+            }
+        } else {
+            for (let i = this.state.lastSuccessfulMoves.length - 1; i > -1; i--) {
+                square = this.getAdjacentHorizontalSquare(i);
+                if (square) {
+                    return square;
+                }
+                square = this.getAdjacentVerticalSquare(i);
+                if (square) {
+                    return square;
+                }
             }
         }
     };
+
+    getAdjacentHorizontalSquare(i) {
+        if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] - 1)) {
+            return (this.state.lastSuccessfulMoves[i] - 1);
+        } else if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] + 1)) {
+            return (this.state.lastSuccessfulMoves[i] + 1);
+        }
+    }
+    getAdjacentVerticalSquare(i) {
+        if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] + 10)) {
+            return (this.state.lastSuccessfulMoves[i] + 10);
+        } else if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] - 10)) {
+            return (this.state.lastSuccessfulMoves[i] - 10);
+        }
+    }
 
     setSuccessfulHit(move) {
         const modifiedSuccessfulMoves = this.state.lastSuccessfulMoves.slice();
@@ -67,12 +100,12 @@ class Game extends Component {
 
     render() {
         return (
-            <div>  
+            <div>
                 <ShipFactory />
-                <PlayerView 
-                    getComputerMove={() => this.getComputerMove()} 
+                <PlayerView
+                    getComputerMove={() => this.getComputerMove()}
                     setSuccessfulHit={(move) => this.setSuccessfulHit(move)}
-                    resetSuccessfulHit={(() => this.resetSuccessfulHit())}/>
+                    resetSuccessfulHit={(() => this.resetSuccessfulHit())} />
             </div>
         );
     };
