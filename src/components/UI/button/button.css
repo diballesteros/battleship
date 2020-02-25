@@ -1,0 +1,14 @@
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 40px;
+    font-size: 12px;
+    border-radius: 16px;
+    border-width: 0;
+    background-color: #00C3FF;
+    font-family: 'Roboto Condensed', sans-serif;
+    outline: 0;
+    margin: 5px;
+}

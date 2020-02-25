@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Gameboard from '../gameboard/Gameboard';
 import Square from '../gameboard/square/Square';
+import Button from '../UI/button/Button';
 
 import './ShipFactory.css';
 import rotate from './rotate.png';
@@ -114,7 +115,7 @@ class ShipFactory extends Component {
     render() {
         return (
             <div className='ship_factory'>
-                <Gameboard ships={this.state.currentShips} myBoard={true} resolveBoardDrop={(i) => this.canPlaceShip(i)} playerMoves={[]} origin={'ShipFactory'} />
+                <Gameboard ships={this.state.currentShips} myBoard={true} resolveBoardDrop={(event, i) => this.canPlaceShip(event, i)} playerMoves={[]} />
                 <div className='ship_store'>
                     <div className='ship_store_title'>
                         <label>Arrange your board</label>
@@ -132,10 +133,10 @@ class ShipFactory extends Component {
                                 }
                             </div>
                             <div>Ships left: {5 - this.state.currentShips.length}/5</div>
-                            <div>
-                                <button>Start Game</button>
-                                <button>Undo</button>
-                                <button>Reset</button>
+                            <div className='ship_store_buttons'>
+                                <Button>Start Game</Button>
+                                <Button clicked={() => this.undoPlacement()}>Undo</Button>
+                                <Button>Reset</Button>
                             </div>
                         </div>
                     }

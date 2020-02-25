@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, getAllByText } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import PlayerView from './PlayerView';
 
 describe('PlayerView Component', () => {

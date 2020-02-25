@@ -49,3 +49,8 @@
 .ship_store_ship.vertical {
     flex-flow: column nowrap;
 }
+
+.ship_store_buttons {
+    display: flex;
+    flex-flow: row nowrap;
+}

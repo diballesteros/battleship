@@ -25,7 +25,7 @@ describe('Gameboard component', () => {
                 id: null
             };
         };
-        const { asFragment } = render(<Gameboard ships={testShips} myBoard={true} board={initialBoard}/>);
+        const { asFragment } = render(<Gameboard ships={testShips} myBoard={true} board={initialBoard} playerMoves={[]}/>);
         expect(asFragment()).toMatchSnapshot();
     });
 });

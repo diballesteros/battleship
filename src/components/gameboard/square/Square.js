@@ -19,8 +19,7 @@ const Square = (props) => {
                     className={`square ship-square ${props.myBoard ? 'my_square' : ''}`}
                     onDrop={props.resolveBoardDrop}
                     onDragOver={props.resolveBoardDrop ? event => onDragOver(event) : null}
-                    onDragLeave={props.resolveBoardDrop ? event => onDragLeave(event) : null}
-                    >
+                    onDragLeave={props.resolveBoardDrop ? event => onDragLeave(event) : null}>
                         {props.hit ? 'X' : ''}
                     </div>
         case 'grid':
