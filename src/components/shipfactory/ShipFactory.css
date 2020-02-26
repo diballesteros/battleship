@@ -1,6 +1,8 @@
 .ship_factory {
     display: flex;
     flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .ship_store {
@@ -9,6 +11,7 @@
     height: 570px;
     width: 320px;
     border: 1px solid black;
+    justify-content: space-around;
 }
 
 .ship_store_title {
@@ -16,7 +19,6 @@
     flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
-    margin-bottom: 15px;
 }
 
 .ship_store_ship_container {
@@ -40,6 +42,11 @@
     width: 260px;
     justify-content: center;
     align-items: center;
+}
+
+.ship_store_counter {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .ship_store_ship.horizontal {

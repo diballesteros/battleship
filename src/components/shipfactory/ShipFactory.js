@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Gameboard from '../gameboard/Gameboard';
 import Square from '../gameboard/square/Square';
 import Button from '../UI/button/Button';
+import Notification from '../UI/notification/Notification';
 
 import './ShipFactory.css';
-import rotate from './rotate.png';
 
 const shipStore = [
     {
@@ -26,6 +26,10 @@ const shipStore = [
     {
         model: 'Destroyer',
         size: 2
+    },
+    {
+        model: '',
+        size: 0
     }
 ];
 
@@ -125,22 +129,22 @@ class ShipFactory extends Component {
                         <div className='ship_store_ship_container'>
                             <div className='ship_store_model'>
                                 <label>Model: {shipStore[this.state.currentShips.length].model}</label>
-                                <div onClick={() => this.rotateShip()}><img alt='rotate' src={rotate} /></div>
                             </div>
                             <div className={`ship_store_ship ${this.state.isHorizontal ? 'horizontal' : 'vertical'}`} draggable onDrag={(event) => this.onDrag(event)}>
                                 {
                                     [...Array(shipStore[this.state.currentShips.length].size)].map((e, i) => <Square key={i} type={'ship'} myBoard={true} />)
                                 }
                             </div>
-                            <div>Ships left: {5 - this.state.currentShips.length}/5</div>
+                            <div className='ship_store_counter'>Ships left: {5 - this.state.currentShips.length}/5</div>
                             <div className='ship_store_buttons'>
-                                <Button>Start Game</Button>
-                                <Button clicked={() => this.undoPlacement()}>Undo</Button>
-                                <Button>Reset</Button>
+                                <Button disabled={this.state.currentShips.length < 5}>Start Game</Button>
+                                <Button clicked={() => this.rotateShip()}>Rotate</Button>
+                                <Button disabled={this.state.currentShips.length === 0} clicked={() => this.undoPlacement()}>Undo</Button>
                             </div>
                         </div>
                     }
                 </div>
+                <Notification>Invalid Placement</Notification>
             </div>
         );
     };

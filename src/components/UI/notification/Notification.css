@@ -1,0 +1,21 @@
+.notification {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    width: 40%;
+    height: 50px;
+    z-index: 1;
+    margin: auto;
+    border: 1px solid;
+    text-align: center;
+    font-weight: bold;
+    background: yellow;
+    opacity: .6;
+}
+
+.notification.active {
+    display: flex;
+}

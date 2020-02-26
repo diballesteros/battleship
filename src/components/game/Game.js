@@ -31,7 +31,8 @@ class Game extends Component {
         if (this.state.successfulComputerHit === true) {
             const startingPoint = this.state.lastSuccessfulMoves.length;
             nextMove = this.getAdjacentSquare(startingPoint - 1);
-        } else {
+        } 
+        if (_.isUndefined(nextMove) || _.isNull(nextMove)) {
             nextMove = _.sample(this.state.computerMoves);
         }
         this.removeComputerMove(nextMove);

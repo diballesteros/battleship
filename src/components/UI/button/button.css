@@ -11,4 +11,10 @@ button {
     font-family: 'Roboto Condensed', sans-serif;
     outline: 0;
     margin: 5px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: silver;
+    cursor: not-allowed;
 }
