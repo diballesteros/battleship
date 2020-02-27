@@ -1,6 +1,7 @@
 import React from 'react';
 import './Gameboard.css';
 import Square from './square/Square';
+import * as Constants from '../../constants/constant';
 
 const createInitialBoard = () => {
   const initialBoard = new Array(100);
@@ -23,9 +24,6 @@ const showShip = (type, isHit) => {
   }
 };
 
-const letterRow = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-const numberColumn = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
 const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, playerMoves}) => {
   const board = createInitialBoard();
 
@@ -47,7 +45,7 @@ const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, play
   return (
     <div>
       <div className='letter_row'>
-        {letterRow.map((value, i) =>
+        {Constants.LETTERROW.map((value, i) =>
           <Square
             key={i}
             text={value}
@@ -56,7 +54,7 @@ const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, play
       </div>
       <div className='lower_section'>
         <div className='number_column'>
-          {numberColumn.map((value, i) =>
+          {Constants.NUMBERCOLUMN.map((value, i) =>
             <Square
               key={i}
               text={value}

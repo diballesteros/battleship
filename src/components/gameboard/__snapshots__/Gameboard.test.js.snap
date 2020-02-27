@@ -249,7 +249,19 @@ exports[`Gameboard component Initialized board 1`] = `
           class="square ocean-square my_square"
         />
         <div
-          class="square ocean-square my_square"
+          class="square ship-square my_square"
+        />
+        <div
+          class="square ship-square my_square"
+        />
+        <div
+          class="square ship-square my_square"
+        />
+        <div
+          class="square ship-square my_square"
+        />
+        <div
+          class="square ship-square my_square"
         />
         <div
           class="square ocean-square my_square"
@@ -297,7 +309,7 @@ exports[`Gameboard component Initialized board 1`] = `
           class="square ocean-square my_square"
         />
         <div
-          class="square ocean-square my_square"
+          class="square ship-square my_square"
         />
         <div
           class="square ocean-square my_square"
@@ -327,7 +339,7 @@ exports[`Gameboard component Initialized board 1`] = `
           class="square ocean-square my_square"
         />
         <div
-          class="square ocean-square my_square"
+          class="square ship-square my_square"
         />
         <div
           class="square ocean-square my_square"
@@ -357,7 +369,7 @@ exports[`Gameboard component Initialized board 1`] = `
           class="square ocean-square my_square"
         />
         <div
-          class="square ocean-square my_square"
+          class="square ship-square my_square"
         />
         <div
           class="square ocean-square my_square"
@@ -387,7 +399,7 @@ exports[`Gameboard component Initialized board 1`] = `
           class="square ocean-square my_square"
         />
         <div
-          class="square ocean-square my_square"
+          class="square ship-square my_square"
         />
         <div
           class="square ocean-square my_square"
@@ -405,22 +417,10 @@ exports[`Gameboard component Initialized board 1`] = `
           class="square ocean-square my_square"
         />
         <div
-          class="square ocean-square my_square"
+          class="square ship-square my_square"
         />
         <div
-          class="square ocean-square my_square"
-        />
-        <div
-          class="square ocean-square my_square"
-        />
-        <div
-          class="square ocean-square my_square"
-        />
-        <div
-          class="square ocean-square my_square"
-        />
-        <div
-          class="square ocean-square my_square"
+          class="square ship-square my_square"
         />
       </div>
     </div>

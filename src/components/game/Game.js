@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import PlayerView from '../playerview/PlayerView';
-
 import _ from 'lodash';
 import ShipFactory from '../shipfactory/ShipFactory'
-
-const beginningSquares = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
-const endSquares = [9, 19, 29, 39, 49, 59, 69, 79, 89, 99];
+import {FIRSTCOLUMNSQUARES, LASTCOLUMNSQUARES} from '../../constants/constant';
 
 class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            playerShips: [],
             computerMoves: [...Array(100).keys()],
             lastSuccessfulMoves: [],
             successfulComputerHit: false
         }
+    };
+
+    setShips(builtShips) {
+        this.setState({
+            playerShips: builtShips
+        })
     };
 
     removeComputerMove(i) {
@@ -72,9 +76,9 @@ class Game extends Component {
     };
 
     getAdjacentHorizontalSquare(i) {
-        if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] - 1) && !beginningSquares.includes(this.state.lastSuccessfulMoves[i])) {
+        if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] - 1) && !FIRSTCOLUMNSQUARES.includes(this.state.lastSuccessfulMoves[i])) {
             return (this.state.lastSuccessfulMoves[i] - 1);
-        } else if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] + 1) && !endSquares.includes(this.state.lastSuccessfulMoves[i])) {
+        } else if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] + 1) && !LASTCOLUMNSQUARES.includes(this.state.lastSuccessfulMoves[i])) {
             return (this.state.lastSuccessfulMoves[i] + 1);
         }
     }
@@ -105,7 +109,8 @@ class Game extends Component {
     render() {
         return (
             <div>
-                <ShipFactory />
+                <ShipFactory 
+                    setShips={(builtShips) => this.setPlayerShips(builtShips)}/>
                 <PlayerView
                     getComputerMove={() => this.getComputerMove()}
                     setSuccessfulHit={(move) => this.setSuccessfulHit(move)}

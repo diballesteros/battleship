@@ -3,35 +3,9 @@ import Gameboard from '../gameboard/Gameboard';
 import Square from '../gameboard/square/Square';
 import Button from '../UI/button/Button';
 import Notification from '../UI/notification/Notification';
+import {SHIPSTORE as shipStore} from '../../constants/constant';
 
 import './ShipFactory.css';
-
-const shipStore = [
-    {
-        model: 'Carrier',
-        size: 5
-    },
-    {
-        model: 'Battleship',
-        size: 4
-    },
-    {
-        model: 'Cruiser',
-        size: 3
-    },
-    {
-        model: 'Submarine',
-        size: 3
-    },
-    {
-        model: 'Destroyer',
-        size: 2
-    },
-    {
-        model: '',
-        size: 0
-    }
-];
 
 class ShipFactory extends Component {
     constructor(props) {
@@ -96,6 +70,10 @@ class ShipFactory extends Component {
         });
     };
 
+    buildComputerShips() {
+
+    }
+
     onDrag = (event) => {
         event.preventDefault();
     };
@@ -137,7 +115,7 @@ class ShipFactory extends Component {
                             </div>
                             <div className='ship_store_counter'>Ships left: {5 - this.state.currentShips.length}/5</div>
                             <div className='ship_store_buttons'>
-                                <Button disabled={this.state.currentShips.length < 5}>Start Game</Button>
+                                <Button disabled={this.state.currentShips.length < 5} clicked={() => this.props.setShips(this.state.currentShips)}>Start Game</Button>
                                 <Button clicked={() => this.rotateShip()}>Rotate</Button>
                                 <Button disabled={this.state.currentShips.length === 0} clicked={() => this.undoPlacement()}>Undo</Button>
                             </div>
