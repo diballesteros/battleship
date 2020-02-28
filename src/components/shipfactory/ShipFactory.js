@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Gameboard from '../gameboard/Gameboard';
 import Square from '../gameboard/square/Square';
 import Button from '../UI/button/Button';
-import Notification from '../UI/notification/Notification';
-import {SHIPSTORE as shipStore} from '../../constants/constant';
+import { SHIPSTORE as shipStore } from '../../constants/constant';
 
 import './ShipFactory.css';
+import _ from 'lodash';
 
 class ShipFactory extends Component {
     constructor(props) {
@@ -19,23 +19,30 @@ class ShipFactory extends Component {
     canPlaceShip(event, i) {
         event.target.style.removeProperty('background-color');
         const units = shipStore[this.state.currentShips.length].size;
-        const positions = this.createPositionsArray(i, units);
-        if (this.state.isHorizontal) {
-            const endOfRow = Math.ceil((i + 1) / 10) * 10;
-            if ((i + units) <= endOfRow && !this.isOccupied(positions)) {
-                this.buildShip(units, positions);
-            } else console.log('invalid placement');
-        } else {
-            if (positions[positions.length - 1] <= 99 && !this.isOccupied(positions)) {
-                this.buildShip(units, positions);
-            } else console.log('invalid placement');
+        const positions = this.createPositionsArray(i, units, this.state.isHorizontal);
+        if (this.arePositionsViable(i, units, positions, this.state.isHorizontal, this.state.currentShips)) {
+            this.buildPlayerShip(units, positions);
         }
     };
 
-    isOccupied(positions) {
+    arePositionsViable(square, units, positions, isHorizontal, ships) {
+        if (isHorizontal) {
+            const endOfRow = Math.ceil((square + 1) / 10) * 10;
+            if ((square + units) <= endOfRow && !this.isOccupied(positions, ships)) {
+                return true;
+            }
+        } else {
+            if (positions[positions.length - 1] <= 99 && !this.isOccupied(positions, ships)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    isOccupied(positions, ships) {
         for (let i = 0; i < positions.length; i++) {
-            for (let j = 0; j < this.state.currentShips.length; j++) {
-                if (this.state.currentShips[j].positions.includes(positions[i])) {
+            for (let j = 0; j < ships.length; j++) {
+                if (ships[j].positions.includes(positions[i])) {
                     return true;
                 }
             }
@@ -43,9 +50,9 @@ class ShipFactory extends Component {
         return false;
     };
 
-    createPositionsArray(index, units) {
+    createPositionsArray(index, units, isHorizontal) {
         const positionArray = [];
-        if (this.state.isHorizontal) {
+        if (isHorizontal) {
             for (let i = 0; i < units; i++) {
                 positionArray.push(index + i);
             }
@@ -57,7 +64,7 @@ class ShipFactory extends Component {
         return positionArray;
     };
 
-    buildShip(units, positions) {
+    buildPlayerShip(units, positions) {
         const newShip = {
             id: this.state.currentShips.length + 1,
             positions: positions,
@@ -71,8 +78,27 @@ class ShipFactory extends Component {
     };
 
     buildComputerShips() {
+        const modifiedComputerShips = [];
+        const computerSquares = [...Array(100).keys()];
+        let isHorizontal = false;
 
-    }
+        while (modifiedComputerShips.length < 5) {
+            let square = _.sample(computerSquares);
+            const positions = this.createPositionsArray(square, shipStore[modifiedComputerShips.length].size, isHorizontal);
+            if (this.arePositionsViable(square, shipStore[modifiedComputerShips.length].size, positions, isHorizontal, modifiedComputerShips)) {
+                const newShip = {
+                    id: modifiedComputerShips.length + 1,
+                    positions: positions,
+                    hits: Array(shipStore[modifiedComputerShips.length].size).fill(false)
+                }
+                modifiedComputerShips.push(newShip);
+                isHorizontal = !isHorizontal;
+            }
+            const squareIndex = computerSquares.findIndex(i => i === square);
+            computerSquares.splice(squareIndex, 1);
+        };
+        return modifiedComputerShips;
+    };
 
     onDrag = (event) => {
         event.preventDefault();
@@ -115,14 +141,14 @@ class ShipFactory extends Component {
                             </div>
                             <div className='ship_store_counter'>Ships left: {5 - this.state.currentShips.length}/5</div>
                             <div className='ship_store_buttons'>
-                                <Button disabled={this.state.currentShips.length < 5} clicked={() => this.props.setShips(this.state.currentShips)}>Start Game</Button>
+                                <Button disabled={this.state.currentShips.length < 5}
+                                    clicked={() => this.props.setShips(this.state.currentShips, this.buildComputerShips())}>Start Game</Button>
                                 <Button clicked={() => this.rotateShip()}>Rotate</Button>
                                 <Button disabled={this.state.currentShips.length === 0} clicked={() => this.undoPlacement()}>Undo</Button>
                             </div>
                         </div>
                     }
                 </div>
-                <Notification>Invalid Placement</Notification>
             </div>
         );
     };

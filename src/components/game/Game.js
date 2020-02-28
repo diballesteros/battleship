@@ -2,22 +2,25 @@ import React, { Component } from 'react';
 import PlayerView from '../playerview/PlayerView';
 import _ from 'lodash';
 import ShipFactory from '../shipfactory/ShipFactory'
-import {FIRSTCOLUMNSQUARES, LASTCOLUMNSQUARES} from '../../constants/constant';
+import { FIRSTCOLUMNSQUARES, LASTCOLUMNSQUARES } from '../../constants/constant';
 
 class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
             playerShips: [],
+            computerShips: [],
             computerMoves: [...Array(100).keys()],
             lastSuccessfulMoves: [],
             successfulComputerHit: false
         }
     };
 
-    setShips(builtShips) {
+    setShips(builtShips, builtComputerShips) {
+        debugger;
         this.setState({
-            playerShips: builtShips
+            playerShips: builtShips,
+            computerShips: builtComputerShips
         })
     };
 
@@ -35,7 +38,7 @@ class Game extends Component {
         if (this.state.successfulComputerHit === true) {
             const startingPoint = this.state.lastSuccessfulMoves.length;
             nextMove = this.getAdjacentSquare(startingPoint - 1);
-        } 
+        }
         if (_.isUndefined(nextMove) || _.isNull(nextMove)) {
             nextMove = _.sample(this.state.computerMoves);
         }
@@ -109,8 +112,8 @@ class Game extends Component {
     render() {
         return (
             <div>
-                <ShipFactory 
-                    setShips={(builtShips) => this.setPlayerShips(builtShips)}/>
+                <ShipFactory
+                    setShips={(builtShips, builtComputerShips) => this.setShips(builtShips, builtComputerShips)} />
                 <PlayerView
                     getComputerMove={() => this.getComputerMove()}
                     setSuccessfulHit={(move) => this.setSuccessfulHit(move)}
