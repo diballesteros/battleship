@@ -37,7 +37,7 @@ class ShipFactory extends Component {
             }
         }
         return false;
-    }
+    };
 
     isOccupied(positions, ships) {
         for (let i = 0; i < positions.length; i++) {

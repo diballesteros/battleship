@@ -12,7 +12,9 @@ class Game extends Component {
             computerShips: [],
             computerMoves: [...Array(100).keys()],
             lastSuccessfulMoves: [],
-            successfulComputerHit: false
+            successfulComputerHit: false,
+            playerMoves: [],
+            completedComputerMoves: []
         }
     };
 
@@ -84,14 +86,15 @@ class Game extends Component {
         } else if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] + 1) && !LASTCOLUMNSQUARES.includes(this.state.lastSuccessfulMoves[i])) {
             return (this.state.lastSuccessfulMoves[i] + 1);
         }
-    }
+    };
+
     getAdjacentVerticalSquare(i) {
         if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] + 10)) {
             return (this.state.lastSuccessfulMoves[i] + 10);
         } else if (this.state.computerMoves.includes(this.state.lastSuccessfulMoves[i] - 10)) {
             return (this.state.lastSuccessfulMoves[i] - 10);
         }
-    }
+    };
 
     setSuccessfulHit(move) {
         const modifiedSuccessfulMoves = this.state.lastSuccessfulMoves.slice();
@@ -107,7 +110,60 @@ class Game extends Component {
             successfulComputerHit: false,
             lastSuccessfulMoves: []
         });
-    }
+    };
+
+    isSunk(positions, isComputer) {
+        const sunkStatus = positions.every(position => position === true);
+        sunkStatus && console.log('You sunk my battleship!');
+        if (sunkStatus && isComputer === true) {
+            this.resetSuccessfulHit();
+        }
+        return sunkStatus;
+    };
+
+    resolveBoardState(move, shipId, ships, isComputer) {
+        const shipIndex = ships.findIndex(ship => ship.id === shipId);
+        const hitIndex = ships[shipIndex].positions.indexOf(move);
+        ships[shipIndex].hits[hitIndex] = true;
+        this.isSunk(ships[shipIndex].hits, isComputer);
+        return ships
+    };
+
+    receivePlayerAttack(shipId, playerMove) {
+        const modifiedPlayerMoves = this.state.playerMoves.slice();
+        modifiedPlayerMoves.push(playerMove);
+        let modifiedComputerShips = this.state.computerShips.slice();
+        if (!_.isNull(shipId)) {
+            modifiedComputerShips = this.resolveBoardState(playerMove, shipId, this.state.computerShips.slice(), false);
+        }
+        
+        const modifiedComputerMoves = this.state.completedComputerMoves.slice();
+        const computerMove = this.getComputerMove();
+        modifiedComputerMoves.push(computerMove);
+        const modifiedPlayerShips = this.resolveComputerTurn(computerMove);
+
+        this.setState({
+            computerShips: modifiedComputerShips,
+            playerMoves: modifiedPlayerMoves,
+            completedComputerMoves: modifiedComputerMoves,
+            playerShips: modifiedPlayerShips
+        });
+    };
+
+    resolveComputerTurn(move) {
+        let modifiedPlayerShips = this.state.playerShips.slice();
+        let foundShip = -1;
+        modifiedPlayerShips.forEach((ship) => {
+            if (ship.positions.includes(move)) {
+                foundShip = ship.id
+            }
+        });
+        if (foundShip > -1) {
+            this.setSuccessfulHit(move);
+            modifiedPlayerShips = this.resolveBoardState(move, foundShip, modifiedPlayerShips, true);
+        }
+        return modifiedPlayerShips;
+    };
 
     render() {
         return (
@@ -115,9 +171,11 @@ class Game extends Component {
                 <ShipFactory
                     setShips={(builtShips, builtComputerShips) => this.setShips(builtShips, builtComputerShips)} />
                 <PlayerView
-                    getComputerMove={() => this.getComputerMove()}
-                    setSuccessfulHit={(move) => this.setSuccessfulHit(move)}
-                    resetSuccessfulHit={(() => this.resetSuccessfulHit())} />
+                    receivePlayerAttack={(shipId, playerMove) => this.receivePlayerAttack(shipId, playerMove)}
+                    playerShips={this.state.playerShips}
+                    playerMoves={this.state.playerMoves}
+                    computerShips={this.state.computerShips}
+                    completedComputerMoves={this.state.completedComputerMoves}/>
             </div>
         );
     };
