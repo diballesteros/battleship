@@ -3,6 +3,7 @@ import PlayerView from '../playerview/PlayerView';
 import _ from 'lodash';
 import ShipFactory from '../shipfactory/ShipFactory'
 import { FIRSTCOLUMNSQUARES, LASTCOLUMNSQUARES } from '../../constants/constant';
+import './Game.css';
 
 class Game extends Component {
     constructor(props) {
@@ -167,15 +168,18 @@ class Game extends Component {
 
     render() {
         return (
-            <div>
-                <ShipFactory
-                    setShips={(builtShips, builtComputerShips) => this.setShips(builtShips, builtComputerShips)} />
-                <PlayerView
+            <div className="game-view"> 
+                {
+                    this.state.playerShips.length === 5 ? 
+                    <PlayerView
                     receivePlayerAttack={(shipId, playerMove) => this.receivePlayerAttack(shipId, playerMove)}
                     playerShips={this.state.playerShips}
                     playerMoves={this.state.playerMoves}
                     computerShips={this.state.computerShips}
-                    completedComputerMoves={this.state.completedComputerMoves}/>
+                    completedComputerMoves={this.state.completedComputerMoves}/> :
+                    <ShipFactory
+                    setShips={(builtShips, builtComputerShips) => this.setShips(builtShips, builtComputerShips)} />
+                }
             </div>
         );
     };
