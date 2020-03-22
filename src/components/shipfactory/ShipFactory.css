@@ -11,8 +11,9 @@
     flex-flow: column nowrap;
     height: 570px;
     width: 320px;
-    border: 1px solid black;
+    border: 2px solid black;
     justify-content: space-around;
+    background: #ffffff;
 }
 
 .ship_store_title {
@@ -28,6 +29,11 @@
     align-items: center;
 }
 
+.ship_store_ship_container label {
+    font-size: 24px;
+    margin: 10px;
+}
+
 .ship_store_model {
     display: flex;
     flex-flow: row nowrap;
@@ -37,12 +43,22 @@
     margin: 10px;
 }
 
-.ship_store_ship {
+.ship_builder {
     display: flex;
-    height: 260px;
-    width: 260px;
     justify-content: center;
     align-items: center;
+    height: 260px;
+    width: 260px;
+}
+
+.ship_store_ship {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    background-color: transparent;
+    height: fit-content;
+    width: fit-content;
 }
 
 .ship_store_counter {
@@ -56,6 +72,7 @@
 
 .ship_store_ship.vertical {
     flex-flow: column nowrap;
+ 
 }
 
 .ship_store_buttons {

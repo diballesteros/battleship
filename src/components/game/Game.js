@@ -20,7 +20,6 @@ class Game extends Component {
     };
 
     setShips(builtShips, builtComputerShips) {
-        debugger;
         this.setState({
             playerShips: builtShips,
             computerShips: builtComputerShips
@@ -169,6 +168,7 @@ class Game extends Component {
     render() {
         return (
             <div className="game-view"> 
+            <label class="game-title">BATTLESHIP</label>
                 {
                     this.state.playerShips.length === 5 ? 
                     <PlayerView

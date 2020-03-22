@@ -132,12 +132,15 @@ class ShipFactory extends Component {
                     {
                         <div className='ship_store_ship_container'>
                             <div className='ship_store_model'>
-                                <label>Model: {shipStore[this.state.currentShips.length].model}</label>
+                                <label>{this.state.currentShips.length === 5 ? 'All ships built! You may start the game.'
+                                : 'Model: ' + shipStore[this.state.currentShips.length].model}</label>
                             </div>
-                            <div className={`ship_store_ship ${this.state.isHorizontal ? 'horizontal' : 'vertical'}`} draggable onDrag={(event) => this.onDrag(event)}>
-                                {
-                                    [...Array(shipStore[this.state.currentShips.length].size)].map((e, i) => <Square key={i} type={'ship'} myBoard={true} />)
-                                }
+                            <div className="ship_builder">
+                                <div className={`ship_store_ship ${this.state.isHorizontal ? 'horizontal' : 'vertical'}`} draggable onDrag={(event) => this.onDrag(event)}>
+                                    {
+                                        [...Array(shipStore[this.state.currentShips.length].size)].map((e, i) => <Square key={i} type={'ship'} myBoard={true} />)
+                                    }
+                                </div>
                             </div>
                             <div className='ship_store_counter'>Ships left: {5 - this.state.currentShips.length}/5</div>
                             <div className='ship_store_buttons'>

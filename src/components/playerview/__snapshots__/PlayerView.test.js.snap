@@ -1,0 +1,877 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerView Component Initialized Playerview 1`] = `
+<DocumentFragment>
+  <div
+    class="player_console"
+  >
+    <div
+      class="player_board"
+    >
+      <label>
+        My Board
+      </label>
+      <div>
+        <div
+          class="letter_row"
+        >
+          <div
+            class="square grid-square"
+          >
+             
+          </div>
+          <div
+            class="square grid-square"
+          >
+            A
+          </div>
+          <div
+            class="square grid-square"
+          >
+            B
+          </div>
+          <div
+            class="square grid-square"
+          >
+            C
+          </div>
+          <div
+            class="square grid-square"
+          >
+            D
+          </div>
+          <div
+            class="square grid-square"
+          >
+            E
+          </div>
+          <div
+            class="square grid-square"
+          >
+            F
+          </div>
+          <div
+            class="square grid-square"
+          >
+            G
+          </div>
+          <div
+            class="square grid-square"
+          >
+            H
+          </div>
+          <div
+            class="square grid-square"
+          >
+            I
+          </div>
+          <div
+            class="square grid-square"
+          >
+            J
+          </div>
+        </div>
+        <div
+          class="lower_section"
+        >
+          <div
+            class="number_column"
+          >
+            <div
+              class="square grid-square"
+            >
+              0
+            </div>
+            <div
+              class="square grid-square"
+            >
+              1
+            </div>
+            <div
+              class="square grid-square"
+            >
+              2
+            </div>
+            <div
+              class="square grid-square"
+            >
+              3
+            </div>
+            <div
+              class="square grid-square"
+            >
+              4
+            </div>
+            <div
+              class="square grid-square"
+            >
+              5
+            </div>
+            <div
+              class="square grid-square"
+            >
+              6
+            </div>
+            <div
+              class="square grid-square"
+            >
+              7
+            </div>
+            <div
+              class="square grid-square"
+            >
+              8
+            </div>
+            <div
+              class="square grid-square"
+            >
+              9
+            </div>
+          </div>
+          <div
+            class="board"
+          >
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ocean-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+            <div
+              class="square ship-square my_square"
+            />
+          </div>
+        </div>
+      </div>
+      <label>
+        Sunk Ships: 0 / 5
+      </label>
+    </div>
+    <div
+      class="player_board"
+      data-testid="1"
+    >
+      <label>
+        Opponent's Board
+      </label>
+      <div>
+        <div
+          class="letter_row"
+        >
+          <div
+            class="square grid-square"
+          >
+             
+          </div>
+          <div
+            class="square grid-square"
+          >
+            A
+          </div>
+          <div
+            class="square grid-square"
+          >
+            B
+          </div>
+          <div
+            class="square grid-square"
+          >
+            C
+          </div>
+          <div
+            class="square grid-square"
+          >
+            D
+          </div>
+          <div
+            class="square grid-square"
+          >
+            E
+          </div>
+          <div
+            class="square grid-square"
+          >
+            F
+          </div>
+          <div
+            class="square grid-square"
+          >
+            G
+          </div>
+          <div
+            class="square grid-square"
+          >
+            H
+          </div>
+          <div
+            class="square grid-square"
+          >
+            I
+          </div>
+          <div
+            class="square grid-square"
+          >
+            J
+          </div>
+        </div>
+        <div
+          class="lower_section"
+        >
+          <div
+            class="number_column"
+          >
+            <div
+              class="square grid-square"
+            >
+              0
+            </div>
+            <div
+              class="square grid-square"
+            >
+              1
+            </div>
+            <div
+              class="square grid-square"
+            >
+              2
+            </div>
+            <div
+              class="square grid-square"
+            >
+              3
+            </div>
+            <div
+              class="square grid-square"
+            >
+              4
+            </div>
+            <div
+              class="square grid-square"
+            >
+              5
+            </div>
+            <div
+              class="square grid-square"
+            >
+              6
+            </div>
+            <div
+              class="square grid-square"
+            >
+              7
+            </div>
+            <div
+              class="square grid-square"
+            >
+              8
+            </div>
+            <div
+              class="square grid-square"
+            >
+              9
+            </div>
+          </div>
+          <div
+            class="board"
+          >
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+            <div
+              class="square ocean-square "
+            />
+          </div>
+        </div>
+      </div>
+      <label>
+        Sunk ships: 0 / 5
+      </label>
+    </div>
+  </div>
+</DocumentFragment>
+`;
