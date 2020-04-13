@@ -24,7 +24,7 @@ const showShip = (type, isHit) => {
   }
 };
 
-const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, playerMoves}) => {
+const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, playerMoves }) => {
   const board = createInitialBoard();
 
   const checkForHit = (i) => {

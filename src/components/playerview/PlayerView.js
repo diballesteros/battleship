@@ -6,7 +6,7 @@ import _ from 'lodash';
 const getSunkShipCount = (ships) => {
     let count = 0;
     ships.forEach(ship => {
-        if (_.every(ship.hits, (hit) => hit === true )) {
+        if (_.every(ship.hits, (hit) => hit === true)) {
             count++;
         }
     });
@@ -31,8 +31,8 @@ const PlayerView = (props) => {
                     ships={props.computerShips}
                     myBoard={false}
                     origin={'Opponent'}
-                    playerMoves={props.playerMoves} 
-                    receivePlayerAttack={(shipId, i) => props.receivePlayerAttack(shipId, i)}/>
+                    playerMoves={props.playerMoves}
+                    receivePlayerAttack={(shipId, i) => props.receivePlayerAttack(shipId, i)} />
                 <label>Sunk ships: {getSunkShipCount(props.computerShips)} / 5</label>
             </div>
         </div>

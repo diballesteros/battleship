@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PlayerView from '../playerview/PlayerView';
-import _ from 'lodash';
-import ShipFactory from '../shipfactory/ShipFactory'
+import ShipFactory from '../shipfactory/ShipFactory';
+import { toast } from "react-toastify";
 import { FIRSTCOLUMNSQUARES, LASTCOLUMNSQUARES } from '../../constants/constant';
 import './Game.css';
+import _ from 'lodash';
 
 class Game extends Component {
     constructor(props) {
@@ -114,7 +115,9 @@ class Game extends Component {
 
     isSunk(positions, isComputer) {
         const sunkStatus = positions.every(position => position === true);
-        sunkStatus && console.log('You sunk my battleship!');
+        sunkStatus && toast.info(`${isComputer ? 'Allied battleship has been sunk!' : 'Enemy battleship has been sunk!'}`, {
+            position: toast.POSITION.BOTTOM_CENTER
+        });
         if (sunkStatus && isComputer === true) {
             this.resetSuccessfulHit();
         }
@@ -136,7 +139,7 @@ class Game extends Component {
         if (!_.isNull(shipId)) {
             modifiedComputerShips = this.resolveBoardState(playerMove, shipId, this.state.computerShips.slice(), false);
         }
-        
+
         const modifiedComputerMoves = this.state.completedComputerMoves.slice();
         const computerMove = this.getComputerMove();
         modifiedComputerMoves.push(computerMove);
@@ -167,18 +170,18 @@ class Game extends Component {
 
     render() {
         return (
-            <div className="game-view"> 
-            <label class="game-title">BATTLESHIP</label>
+            <div className="game-view">
+                <label class="game-title">BATTLESHIP</label>
                 {
-                    this.state.playerShips.length === 5 ? 
-                    <PlayerView
-                    receivePlayerAttack={(shipId, playerMove) => this.receivePlayerAttack(shipId, playerMove)}
-                    playerShips={this.state.playerShips}
-                    playerMoves={this.state.playerMoves}
-                    computerShips={this.state.computerShips}
-                    completedComputerMoves={this.state.completedComputerMoves}/> :
-                    <ShipFactory
-                    setShips={(builtShips, builtComputerShips) => this.setShips(builtShips, builtComputerShips)} />
+                    this.state.playerShips.length === 5 ?
+                        <PlayerView
+                            receivePlayerAttack={(shipId, playerMove) => this.receivePlayerAttack(shipId, playerMove)}
+                            playerShips={this.state.playerShips}
+                            playerMoves={this.state.playerMoves}
+                            computerShips={this.state.computerShips}
+                            completedComputerMoves={this.state.completedComputerMoves} /> :
+                        <ShipFactory
+                            setShips={(builtShips, builtComputerShips) => this.setShips(builtShips, builtComputerShips)} />
                 }
             </div>
         );
