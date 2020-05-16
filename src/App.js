@@ -6,7 +6,7 @@ import './index.css';
 
 const App = () => {
   return (
-    <div class="container-view">
+    <div className="container-view">
       <Game />
       <ToastContainer />
     </div>

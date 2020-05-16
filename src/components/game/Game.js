@@ -16,7 +16,8 @@ class Game extends Component {
             lastSuccessfulMoves: [],
             successfulComputerHit: false,
             playerMoves: [],
-            completedComputerMoves: []
+            completedComputerMoves: [],
+            gameResolved: false
         }
     };
 
@@ -128,7 +129,7 @@ class Game extends Component {
         const shipIndex = ships.findIndex(ship => ship.id === shipId);
         const hitIndex = ships[shipIndex].positions.indexOf(move);
         ships[shipIndex].hits[hitIndex] = true;
-        this.isSunk(ships[shipIndex].hits, isComputer);
+        ships[shipIndex].isSunk = this.isSunk(ships[shipIndex].hits, isComputer);
         return ships
     };
 
@@ -145,11 +146,14 @@ class Game extends Component {
         modifiedComputerMoves.push(computerMove);
         const modifiedPlayerShips = this.resolveComputerTurn(computerMove);
 
+        const gameResolved = this.resolveGameState(modifiedPlayerShips, modifiedComputerShips);
+
         this.setState({
             computerShips: modifiedComputerShips,
             playerMoves: modifiedPlayerMoves,
             completedComputerMoves: modifiedComputerMoves,
-            playerShips: modifiedPlayerShips
+            playerShips: modifiedPlayerShips,
+            gameResolved: gameResolved
         });
     };
 
@@ -168,10 +172,27 @@ class Game extends Component {
         return modifiedPlayerShips;
     };
 
+    resolveGameState(playerShips, computerShips) {
+        const playerShipsSunk = _.every(playerShips, (ship) => ship.isSunk === true);
+        const computerShipsSunk = _.every(computerShips, (ship) => ship.isSunk === true)
+        if (playerShipsSunk) {
+            toast.error(`${'You lose!'}`, {
+                position: toast.POSITION.BOTTOM_CENTER
+            });
+            return true;
+        } else if (computerShipsSunk) {
+            toast.success(`${'You win!'}`, {
+                position: toast.POSITION.BOTTOM_CENTER
+            });
+            return true;
+        }
+        return false;
+    }
+
     render() {
         return (
             <div className="game-view">
-                <label class="game-title">BATTLESHIP</label>
+                <label className="game-title">BATTLESHIP</label>
                 {
                     this.state.playerShips.length === 5 ?
                         <PlayerView

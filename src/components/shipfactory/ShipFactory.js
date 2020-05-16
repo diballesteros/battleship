@@ -68,6 +68,7 @@ class ShipFactory extends Component {
         const newShip = {
             id: this.state.currentShips.length + 1,
             positions: positions,
+            isSunk: false,
             hits: Array(units).fill(false)
         }
         const modifiedCurrentShips = this.state.currentShips.slice();
@@ -89,6 +90,7 @@ class ShipFactory extends Component {
                 const newShip = {
                     id: modifiedComputerShips.length + 1,
                     positions: positions,
+                    isSunk: false,
                     hits: Array(shipStore[modifiedComputerShips.length].size).fill(false)
                 }
                 modifiedComputerShips.push(newShip);
