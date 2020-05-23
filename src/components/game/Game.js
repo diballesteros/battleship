@@ -18,7 +18,7 @@ class Game extends Component {
             successfulComputerHit: false,
             playerMoves: [],
             completedComputerMoves: [],
-            gameResolved: true
+            gameResolved: false
         }
     };
 
