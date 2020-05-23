@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PlayerView from '../playerview/PlayerView';
 import ShipFactory from '../shipfactory/ShipFactory';
+import Modal from '../UI/Modal/Modal';
 import { toast } from "react-toastify";
 import { FIRSTCOLUMNSQUARES, LASTCOLUMNSQUARES } from '../../constants/constant';
 import './Game.css';
@@ -17,7 +18,7 @@ class Game extends Component {
             successfulComputerHit: false,
             playerMoves: [],
             completedComputerMoves: [],
-            gameResolved: false
+            gameResolved: true
         }
     };
 
@@ -189,21 +190,42 @@ class Game extends Component {
         return false;
     }
 
+    resetGame() {
+        this.setState({
+            playerShips: [],
+            computerShips: [],
+            computerMoves: [...Array(100).keys()],
+            lastSuccessfulMoves: [],
+            successfulComputerHit: false,
+            playerMoves: [],
+            completedComputerMoves: [],
+            gameResolved: false
+        });
+    }
+
     render() {
         return (
-            <div className="game-view">
-                <label className="game-title">BATTLESHIP</label>
+            <div className="game-page">
+                <div className="game-view">
+                    <label className="game-title">BATTLESHIP</label>
+                    {
+                        this.state.playerShips.length === 5 ?
+                            <PlayerView
+                                receivePlayerAttack={(shipId, playerMove) => this.receivePlayerAttack(shipId, playerMove)}
+                                playerShips={this.state.playerShips}
+                                playerMoves={this.state.playerMoves}
+                                computerShips={this.state.computerShips}
+                                completedComputerMoves={this.state.completedComputerMoves} /> :
+                            <ShipFactory
+                                setShips={(builtShips, builtComputerShips) => this.setShips(builtShips, builtComputerShips)} />
+                    }
+                   
+                </div>
                 {
-                    this.state.playerShips.length === 5 ?
-                        <PlayerView
-                            receivePlayerAttack={(shipId, playerMove) => this.receivePlayerAttack(shipId, playerMove)}
-                            playerShips={this.state.playerShips}
-                            playerMoves={this.state.playerMoves}
-                            computerShips={this.state.computerShips}
-                            completedComputerMoves={this.state.completedComputerMoves} /> :
-                        <ShipFactory
-                            setShips={(builtShips, builtComputerShips) => this.setShips(builtShips, builtComputerShips)} />
-                }
+                    this.state.gameResolved === true ?
+                    <Modal modalText={'Game over'} modalFn={() => this.resetGame()}>New Game</Modal> :
+                    null
+                }   
             </div>
         );
     };

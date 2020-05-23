@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal component Modal initalized 1`] = `
+<DocumentFragment>
+  <div
+    class="modal-background"
+  >
+    <div
+      class="modal"
+    >
+      <label>
+        Game over
+      </label>
+      <button>
+        New Game
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
