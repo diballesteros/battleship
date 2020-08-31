@@ -1,3 +1,5 @@
+import { GameState } from './Types';
+
 // Game
 export const FIRSTCOLUMNSQUARES = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
 export const LASTCOLUMNSQUARES = [9, 19, 29, 39, 49, 59, 69, 79, 89, 99];
@@ -62,3 +64,14 @@ export const TESTSHIPS = [
     hits: [false, false, false, false],
   },
 ];
+
+export const INITIAL_STATE: GameState = {
+  playerShips: [],
+  computerShips: [],
+  computerMoves: [...Array(100).keys()],
+  lastSuccessfulMoves: [],
+  successfulComputerHit: false,
+  playerMoves: [],
+  completedComputerMoves: [],
+  gameResolved: false,
+};
