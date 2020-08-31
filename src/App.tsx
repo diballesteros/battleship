@@ -1,16 +1,16 @@
 import React from 'react';
-import Game from './components/game/Game';
-import { ToastContainer } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
+import Game from 'components/game/Game';
 import 'react-toastify/dist/ReactToastify.css';
-import './index.css';
+import 'index.css';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="container-view">
       <Game />
       <ToastContainer />
     </div>
   );
-}
+};
 
 export default App;
