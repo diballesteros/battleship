@@ -46,13 +46,13 @@ const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, play
     <div>
       <div className="letter_row">
         {Constants.LETTERROW.map((value, i) => (
-          <Square key={i} text={value} type="grid"></Square>
+          <Square key={i} text={value} type="grid" />
         ))}
       </div>
       <div className="lower_section">
         <div className="number_column">
           {Constants.NUMBERCOLUMN.map((value, i) => (
-            <Square key={i} text={value} type="grid"></Square>
+            <Square key={i} text={value} type="grid" />
           ))}
         </div>
         <div className="board">
@@ -64,7 +64,7 @@ const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, play
                   hit={checkForHit(i)}
                   myBoard={myBoard}
                   resolveBoardDrop={resolveBoardDrop ? (event) => resolveBoardDrop(event, i) : null}
-                ></Square>
+                />
               ))
             : board.map((square, i) => (
                 <Square
@@ -74,7 +74,7 @@ const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, play
                   resolveSquareClick={
                     checkForHit(i) ? null : () => receivePlayerAttack(square.id, i)
                   }
-                ></Square>
+                />
               ))}
         </div>
       </div>

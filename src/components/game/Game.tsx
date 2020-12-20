@@ -191,8 +191,6 @@ const Game: React.FC = () => {
   };
 
   const receivePlayerAttack = (shipId: number, playerMove: number) => {
-    const modifiedPlayerMoves = state.playerMoves.slice();
-    modifiedPlayerMoves.push(playerMove);
     let modifiedComputerShips = state.computerShips.slice();
     if (!_.isNull(shipId)) {
       modifiedComputerShips = resolveBoardState(
@@ -203,9 +201,7 @@ const Game: React.FC = () => {
       );
     }
 
-    const modifiedComputerMoves = state.completedComputerMoves.slice();
     const computerMove = getComputerMove();
-    modifiedComputerMoves.push(computerMove);
     const modifiedPlayerShips = resolveComputerTurn(computerMove);
 
     const gameResolved = resolveGameState(modifiedPlayerShips, modifiedComputerShips);
@@ -214,10 +210,10 @@ const Game: React.FC = () => {
       type: 'PLAYER_MOVE',
       payload: {
         computerShips: modifiedComputerShips,
-        playerMoves: modifiedPlayerMoves,
+        playerMoves: [...state.playerMoves, playerMove],
         gameResolved,
         playerShips: modifiedPlayerShips,
-        completedComputerMoves: modifiedComputerMoves,
+        completedComputerMoves: [...state.completedComputerMoves, computerMove],
       },
     });
   };
@@ -248,11 +244,11 @@ const Game: React.FC = () => {
           />
         )}
       </div>
-      {state.gameResolved === true ? (
+      {state.gameResolved === true && (
         <Modal modalText="Game over" modalFn={() => resetGame()}>
           New Game
         </Modal>
-      ) : null}
+      )}
     </div>
   );
 };
