@@ -21,6 +21,7 @@ const Square = (props) => {
           onDrop={props.resolveBoardDrop}
           onDragOver={props.resolveBoardDrop ? (event) => onDragOver(event) : null}
           onDragLeave={props.resolveBoardDrop ? (event) => onDragLeave(event) : null}
+          role="presentation"
         >
           {props.hit ? 'X' : ''}
         </div>
@@ -35,6 +36,7 @@ const Square = (props) => {
           onDrop={props.resolveBoardDrop}
           onDragOver={(event) => onDragOver(event)}
           onDragLeave={(event) => onDragLeave(event)}
+          role="presentation"
         >
           {props.hit ? 'X' : ''}
         </div>

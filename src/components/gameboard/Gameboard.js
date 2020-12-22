@@ -5,23 +5,22 @@ import * as Constants from '../../constants/constant';
 
 const createInitialBoard = () => {
   const initialBoard = new Array(100);
-  for (var i = 0; i < 100; i++) {
-    initialBoard[i] = {
+  initialBoard.forEach((el, index) => {
+    initialBoard[index] = {
       hit: false,
-      position: i,
+      position: index,
       type: 'ocean',
       id: null,
     };
-  }
+  });
   return initialBoard;
 };
 
 const showShip = (type, isHit) => {
   if (type === 'ship' && isHit === true) {
     return 'ship';
-  } else {
-    return 'ocean';
   }
+  return 'ocean';
 };
 
 const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, playerMoves }) => {
@@ -46,20 +45,20 @@ const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, play
     <div>
       <div className="letter_row">
         {Constants.LETTERROW.map((value, i) => (
-          <Square key={i} text={value} type="grid" />
+          <Square key={`letter-${i + 1}`} text={value} type="grid" />
         ))}
       </div>
       <div className="lower_section">
         <div className="number_column">
           {Constants.NUMBERCOLUMN.map((value, i) => (
-            <Square key={i} text={value} type="grid" />
+            <Square key={`number-${i + 1}`} text={value} type="grid" />
           ))}
         </div>
         <div className="board">
           {myBoard
             ? board.map((square, i) => (
                 <Square
-                  key={i}
+                  key={`board-${i + 1}`}
                   type={square.type}
                   hit={checkForHit(i)}
                   myBoard={myBoard}
@@ -68,7 +67,7 @@ const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, play
               ))
             : board.map((square, i) => (
                 <Square
-                  key={i}
+                  key={`board-${i + 1}`}
                   type={showShip(square.type, checkForHit(i))}
                   hit={checkForHit(i)}
                   resolveSquareClick={
