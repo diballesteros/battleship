@@ -1,7 +1,7 @@
 {
   "settings": {
     "react": {
-      "version": "16.13.1"
+      "version": "17.0.2"
     },
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
     "import/parsers": {
@@ -19,11 +19,9 @@
   },
   "extends": [
     "airbnb-typescript",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "prettier/react"
+    "prettier",
+    "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
