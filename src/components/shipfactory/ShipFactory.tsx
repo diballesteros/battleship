@@ -6,16 +6,18 @@ import Button from '../UI/button/Button';
 import { SHIPSTORE as shipStore } from '../../constants/constant';
 import './ShipFactory.css';
 
-const ShipFactory: React.FC = () => {
+interface ShipFactoryProps {
+  setShips: (a: any, b: any) => void;
+}
+
+const ShipFactory: React.FC<ShipFactoryProps> = ({ setShips }) => {
   const [isHorizontal, setIsHorizontal] = useState(true);
   const [currentShips, setCurrentShips] = useState([]);
 
   const isOccupied = (positions: any[], ships: any[]) => {
     positions.forEach((pos, posIndex) => {
-      ships.forEach((ship, shipIndex) => {
-        if (ships[shipIndex].positions.includes(positions[posIndex])) {
-          return true;
-        }
+      return ships.some((ship, shipIndex) => {
+        return ships[shipIndex].positions.includes(positions[posIndex]);
       });
     });
     return false;
@@ -54,8 +56,7 @@ const ShipFactory: React.FC = () => {
     setCurrentShips(modifiedCurrentShips);
   };
 
-  const canPlaceShip = (e, i: number) => {
-    e.target.style.removeProperty('background-color');
+  const canPlaceShip = (e: React.DragEvent<HTMLDivElement>, i: number) => {
     const units = shipStore[currentShips.length].size;
     const positions = createPositionsArray(i, units);
     if (arePositionsViable(i, units, positions, currentShips)) {
@@ -92,7 +93,7 @@ const ShipFactory: React.FC = () => {
     return modifiedComputerShips;
   };
 
-  const onDrag = (e: any) => {
+  const onDrag = (e: React.DragEvent) => {
     e.preventDefault();
   };
 
@@ -113,8 +114,9 @@ const ShipFactory: React.FC = () => {
       <Gameboard
         ships={currentShips}
         myBoard
-        resolveBoardDrop={(e, i) => canPlaceShip(e, i)}
+        resolveBoardDrop={canPlaceShip}
         playerMoves={[]}
+        receivePlayerAttack={null}
       />
       <div className="ship_store">
         <div className="ship_store_title">
@@ -134,7 +136,7 @@ const ShipFactory: React.FC = () => {
             <div
               className={`ship_store_ship ${isHorizontal ? 'horizontal' : 'vertical'}`}
               draggable
-              onDrag={(event) => onDrag(event)}
+              onDrag={onDrag}
             >
               {[...Array(shipStore[currentShips.length].size)].map((e, i) => (
                 <Square key={`shipstore-${i + 1}`} type="ship" myBoard />
@@ -145,7 +147,7 @@ const ShipFactory: React.FC = () => {
           <div className="ship_store_buttons">
             <Button
               disabled={currentShips.length < 5}
-              clicked={() => this.props.setShips(currentShips, buildComputerShips())}
+              clicked={() => setShips(currentShips, buildComputerShips())}
             >
               Start Game
             </Button>
