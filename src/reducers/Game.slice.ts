@@ -1,13 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = false;
+import { INITIAL_STATE } from 'constants/constant';
 
 export const gameSlice = createSlice({
   name: 'game',
-  initialState,
+  initialState: INITIAL_STATE,
   reducers: {
     setUpdate(state) {
-      return !state;
+      return state;
     },
   },
 });

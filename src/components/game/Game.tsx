@@ -4,10 +4,12 @@ import { toast } from 'react-toastify';
 import _ from 'lodash';
 import { GameState, GameActions, Ship } from 'constants/Types';
 import { INITIAL_STATE, FIRSTCOLUMNSQUARES, LASTCOLUMNSQUARES } from 'constants/constant';
+import Factory from 'containers/Factory/Factory';
+import NewGameBoard from 'components/NewGameBoard/NewGameBoard';
 import PlayerView from '../playerview/PlayerView';
 import ShipFactory from '../shipfactory/ShipFactory';
 import Modal from '../UI/Modal/Modal';
-import './Game.css';
+import styles from './Game.module.scss';
 
 const gameReducer = (state: GameState, action: GameActions) => {
   switch (action.type) {
@@ -223,32 +225,14 @@ const Game: React.FC = () => {
   };
 
   return (
-    <div className="game-page">
-      <div className="game-view">
-        <span className="game-title">BATTLESHIP</span>
-        {state.playerShips.length === 5 ? (
-          <PlayerView
-            receivePlayerAttack={(shipId: number, playerMove: number) =>
-              receivePlayerAttack(shipId, playerMove)
-            }
-            playerShips={state.playerShips}
-            playerMoves={state.playerMoves}
-            computerShips={state.computerShips}
-            completedComputerMoves={state.completedComputerMoves}
-          />
-        ) : (
-          <ShipFactory
-            setShips={(builtShips: any, builtComputerShips: any) =>
-              setShips(builtShips, builtComputerShips)
-            }
-          />
-        )}
+    <div className={styles.game_page}>
+      <h1 className={styles.game_title}>BATTLESHIP</h1>
+      <div className={styles.areaOne}>
+        <NewGameBoard />
       </div>
-      {state.gameResolved === true && (
-        <Modal modalText="Game over" modalFn={() => resetGame()}>
-          New Game
-        </Modal>
-      )}
+      <div className={styles.areaTwo}>
+        <Factory />
+      </div>
     </div>
   );
 };

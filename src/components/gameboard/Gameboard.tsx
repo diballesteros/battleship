@@ -1,6 +1,6 @@
 import React from 'react';
 import './Gameboard.css';
-import Square from './square/Square';
+import Square from '../square/Square';
 import * as Constants from '../../constants/constant';
 
 const createInitialBoard = () => {
@@ -16,22 +16,28 @@ const createInitialBoard = () => {
   return initialBoard;
 };
 
-const showShip = (type, isHit) => {
+const showShip = (type: any, isHit: boolean) => {
   if (type === 'ship' && isHit === true) {
     return 'ship';
   }
   return 'ocean';
 };
 
-const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, playerMoves }) => {
+const Gameboard: React.FC = ({
+  ships,
+  myBoard,
+  receivePlayerAttack,
+  resolveBoardDrop,
+  playerMoves,
+}: any) => {
   const board = createInitialBoard();
 
-  const checkForHit = (i) => {
+  const checkForHit = (i: number) => {
     return playerMoves.includes(i);
   };
 
-  ships.forEach((ship) => {
-    ship.positions.forEach((coordinate, index) => {
+  ships.forEach((ship: any) => {
+    ship.positions.forEach((coordinate: any, index: number) => {
       board[coordinate] = {
         hit: ship.hits[index],
         position: coordinate,
@@ -62,7 +68,9 @@ const Gameboard = ({ ships, myBoard, receivePlayerAttack, resolveBoardDrop, play
                   type={square.type}
                   hit={checkForHit(i)}
                   myBoard={myBoard}
-                  resolveBoardDrop={resolveBoardDrop ? (event) => resolveBoardDrop(event, i) : null}
+                  resolveBoardDrop={
+                    resolveBoardDrop ? (e: any) => resolveBoardDrop(event, i) : null
+                  }
                 />
               ))
             : board.map((square, i) => (

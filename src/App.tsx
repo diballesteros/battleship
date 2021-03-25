@@ -5,10 +5,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'index.css';
 
 const App: React.FC = () => (
-  <div className="container-view">
+  <main style={{ height: '100%' }}>
     <Game />
     <ToastContainer />
-  </div>
+  </main>
 );
 
 export default App;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
-import Gameboard from '../gameboard/Gameboard';
-import Square from '../gameboard/square/Square';
-import Button from '../UI/button/Button';
-import { SHIPSTORE as shipStore } from '../../constants/constant';
+import Gameboard from 'components/gameboard/Gameboard';
+import Square from 'components/square/Square';
+import Button from 'components/UI/button/Button';
+import { SHIPSTORE as shipStore } from 'constants/constant';
 import './ShipFactory.css';
 
 interface ShipFactoryProps {
@@ -111,19 +111,11 @@ const ShipFactory: React.FC<ShipFactoryProps> = ({ setShips }) => {
 
   return (
     <div className="ship_factory">
-      <Gameboard
-        ships={currentShips}
-        myBoard
-        resolveBoardDrop={canPlaceShip}
-        playerMoves={[]}
-        receivePlayerAttack={null}
-      />
       <div className="ship_store">
         <div className="ship_store_title">
           <h3>Arrange your board</h3>
           <span>Drag and drop the ship below on a square</span>
         </div>
-
         <div className="ship_store_ship_container">
           <div className="ship_store_model">
             <span>

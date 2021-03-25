@@ -1,22 +1,22 @@
-.letter_row {
-    display: flex;
-    flex-flow: row wrap;
-    width: 624px;
+.letters {
+  display: flex;
+  flex-flow: row wrap;
+  width: 624px;
 }
 
-.lower_section {
-    display: flex;
-    flex-flow: row nowrap;
+.container {
+  display: flex;
+  flex-flow: row nowrap;
 }
 
-.number_column {
-    display: flex;
-    flex-flow: column nowrap;
+.numbers {
+  display: flex;
+  flex-flow: column nowrap;
 }
 
-.board {
-    display: flex;
-    flex-flow: row wrap;
-    width: 520px;
-    height: 520px;
+.innerBoard {
+  display: flex;
+  flex-flow: row wrap;
+  width: 520px;
+  height: 520px;
 }

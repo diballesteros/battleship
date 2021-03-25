@@ -1,0 +1,34 @@
+.game_page {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  row-gap: 25px;
+  grid-template-areas:
+    'Header Header'
+    'AreaOne AreaTwo';
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+
+  .game_title {
+    grid-area: Header;
+    display: grid;
+    place-items: center;
+    padding: 20px 0;
+    font-size: 64px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .areaOne {
+    display: flex;
+    grid-area: AreaOne;
+    min-height: 0;
+  }
+
+  .areaTwo {
+    display: flex;
+    grid-area: AreaTwo;
+    min-height: 0;
+  }
+}

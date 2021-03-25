@@ -1,0 +1,76 @@
+.factory {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .store {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 570px;
+    width: 320px;
+    border: 2px solid black;
+    justify-content: space-around;
+    background: #ffffff;
+
+    &__title {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__container {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+
+      label {
+        font-size: 24px;
+        margin: 10px;
+      }
+
+      .model {
+        display: flex;
+        flex-flow: row nowrap;
+      }
+
+      .builder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 260px;
+        width: 260px;
+
+        &__ship {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: none;
+          background-color: transparent;
+          height: fit-content;
+          width: fit-content;
+
+          &.horizontal {
+            flex-flow: row nowrap;
+          }
+
+          &.vertical {
+            flex-flow: column nowrap;
+          }
+        }
+      }
+
+      .counter {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .buttons {
+        display: flex;
+        flex-flow: row nowrap;
+      }
+    }
+  }
+}

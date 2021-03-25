@@ -1,11 +1,11 @@
 export type GameState = {
-  playerShips: Array<Ship>;
-  computerShips: Array<Ship>;
-  computerMoves: Array<number>;
-  lastSuccessfulMoves: Array<number>;
+  playerShips: Ship[];
+  computerShips: Ship[];
+  computerMoves: number[];
+  lastSuccessfulMoves: number[];
   successfulComputerHit: boolean;
-  playerMoves: Array<number>;
-  completedComputerMoves: Array<number>;
+  playerMoves: number[];
+  completedComputerMoves: number[];
   gameResolved: boolean;
 };
 
@@ -45,7 +45,7 @@ export type GameActions =
     };
 
 export type Ship = {
+  hits: boolean[];
   id: number;
-  positions: Array<number>;
-  hits: Array<boolean>;
+  positions: number[];
 };
