@@ -22,7 +22,7 @@ const Factory: React.FC = () => {
               // onDrag={onDrag}
             >
               {[...Array(5)].map((e, i) => (
-                <Square key={`shipstore-${i + 1}`} type="ship" myBoard />
+                <Square key={`shipstore-${i + 1}`} />
               ))}
             </div>
           </div>

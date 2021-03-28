@@ -131,7 +131,7 @@ const ShipFactory: React.FC<ShipFactoryProps> = ({ setShips }) => {
               onDrag={onDrag}
             >
               {[...Array(shipStore[currentShips.length].size)].map((e, i) => (
-                <Square key={`shipstore-${i + 1}`} type="ship" myBoard />
+                <Square key={`shipstore-${i + 1}`} />
               ))}
             </div>
           </div>
