@@ -1,17 +1,16 @@
 import React from 'react';
 import { LETTERROW, NUMBERCOLUMN } from 'constants/constant';
+import Square from 'components/square/Square';
 import styles from './NewGameBoard.module.scss';
 
 const NewGameBoard: React.FC = () => {
-  const createInitialBoard = () => {
-    return new Array(100).map((el, index) => {
-      return {
-        id: null,
-        position: index,
-        type: 'OCEAN',
-      };
-    });
-  };
+  const createInitialBoard = new Array(99).map((el, index) => {
+    return {
+      id: null,
+      position: index,
+      type: 'OCEAN',
+    };
+  });
 
   return (
     <div className={styles.board}>
@@ -31,9 +30,8 @@ const NewGameBoard: React.FC = () => {
           ))}
         </div>
         <div className={styles.innerBoard}>
-          {createInitialBoard().map(() => {
-            return <span>test</span>;
-          })}
+          {new Array(99).fill(<Square />)}
+          <Square />
         </div>
       </div>
     </div>

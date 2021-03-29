@@ -30,9 +30,11 @@
     }
 
     .innerBoard {
-      display: flex;
-      flex-flow: row wrap;
-      flex: 1;
+      display: grid;
+      grid-column: 2/12;
+      grid-row: 1/12;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      grid-template-rows: repeat(10, minmax(0, 1fr));
     }
   }
 

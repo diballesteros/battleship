@@ -1,5 +1,5 @@
 import React from 'react';
-import './Square.css';
+import styles from './Square.module.scss';
 
 const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
   // e.target.style.backgroundColor = 'darkblue';
@@ -11,16 +11,16 @@ const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
   e.preventDefault();
 };
 
-const Square: React.FC = () => {
+const Square: React.FC = React.memo(() => {
   return (
     <div
-      className="square ocean-square"
+      className={`${styles.square} ${styles.ocean}`}
       onDrop={null}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
       role="presentation"
     />
   );
-};
+});
 
 export default Square;
