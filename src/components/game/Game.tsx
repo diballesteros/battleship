@@ -2,7 +2,7 @@
 import React, { useReducer } from 'react';
 import { toast } from 'react-toastify';
 import _ from 'lodash';
-import { GameState, GameActions, Ship } from 'constants/Types';
+import { GameState, GameActions, TShip } from 'constants/Types';
 import { INITIAL_STATE, FIRSTCOLUMNSQUARES, LASTCOLUMNSQUARES } from 'constants/constant';
 import Factory from 'containers/Factory/Factory';
 import NewGameBoard from 'components/NewGameBoard/NewGameBoard';

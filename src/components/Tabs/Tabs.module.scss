@@ -1,0 +1,18 @@
+.tabs {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+  width: 100%;
+
+  .options {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+  }
+
+  .content {
+    position: relative;
+    flex: 1;
+    overflow-x: hidden;
+  }
+}

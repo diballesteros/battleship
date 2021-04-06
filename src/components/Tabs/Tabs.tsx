@@ -1,29 +1,13 @@
 import React, { useState } from 'react';
 import { animated, useTransition } from 'react-spring';
+import { SHIPSTORE } from 'constants/constant';
+import styles from './Tabs.module.scss';
 
 const Tabs: React.FC = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [previousTab, setPreviousTab] = useState(0);
 
-  const items = [
-    {
-      label: 'TAB',
-      key: 1,
-      component: 'AAAAAAAAAAAAAAAA',
-    },
-    {
-      label: 'TAB',
-      key: 2,
-      component: 'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB',
-    },
-    {
-      label: 'TAB',
-      key: 3,
-      component: 'CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC',
-    },
-  ];
-
-  const transitions = useTransition(items[currentTab], null, {
+  const transitions = useTransition(SHIPSTORE[currentTab], (e) => e.model, {
     unique: true,
     from: () => {
       return {
@@ -45,28 +29,28 @@ const Tabs: React.FC = () => {
   });
   if (currentTab !== previousTab) setPreviousTab(currentTab);
   return (
-    <div>
-      <div>
-        {items.map((el, index) => {
+    <div className={styles.tabs}>
+      <div className={styles.options}>
+        {SHIPSTORE.map((el, index) => {
           return (
             <div key={`tab-${index + 1}`} onClick={() => setCurrentTab(index)} role="presentation">
-              {el.label}
+              {el.model}
             </div>
           );
         })}
       </div>
-      <div style={{ overflowX: 'auto', position: 'relative' }}>
+      <div className={styles.content}>
         {transitions.map(({ item, key, props }) => (
           <animated.div
             key={key}
             style={{
               ...props,
               width: '100%',
-              height: '200px',
+              height: '100%',
               background: 'linear-gradient(to right, red , yellow)',
             }}
           >
-            {item.component}
+            {item.model}
           </animated.div>
         ))}
       </div>

@@ -17,15 +17,6 @@ const Factory: React.FC = () => {
             <span>{false ? 'All ships built! You may start the game.' : `Model: N/A`}</span>
           </div>
           <div className={styles.builder}>
-            {/* <div
-              className={`${styles.builder__ship} ${false ? styles.horizontal : styles.vertical}`}
-              draggable
-              // onDrag={onDrag}
-            >
-              {[...Array(5)].map((e, i) => (
-                <Square key={`shipstore-${i + 1}`} />
-              ))}
-            </div> */}
             <Tabs />
           </div>
           <div className={styles.counter}>Ships left: 5/5</div>

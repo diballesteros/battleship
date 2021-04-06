@@ -1,4 +1,4 @@
-import { GameState } from './Types';
+import { GameState, TFactoryShip } from './Types';
 
 // Game
 export const FIRSTCOLUMNSQUARES = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
@@ -9,30 +9,26 @@ export const LETTERROW = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
 export const NUMBERCOLUMN = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 // ShipFactory.js
-export const SHIPSTORE = [
+export const SHIPSTORE: TFactoryShip[] = [
   {
-    model: 'Carrier',
+    model: 'CARRIER',
     size: 5,
   },
   {
-    model: 'Battleship',
+    model: 'BATTLESHIP',
     size: 4,
   },
   {
-    model: 'Cruiser',
+    model: 'CRUISER',
     size: 3,
   },
   {
-    model: 'Submarine',
+    model: 'SUBMARINE',
     size: 3,
   },
   {
-    model: 'Destroyer',
+    model: 'DESTROYER',
     size: 2,
-  },
-  {
-    model: '',
-    size: 0,
   },
 ];
 
