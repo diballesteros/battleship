@@ -1,20 +1,21 @@
 button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90px;
-    height: 40px;
-    font-size: 12px;
-    border-radius: 16px;
-    border-width: 0;
-    background-color: #00C3FF;
-    font-family: 'Roboto Condensed', sans-serif;
-    outline: 0;
-    margin: 5px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 40px;
+  font-size: 12px;
+  border-radius: 16px;
+  border-width: 0;
+  color: #fff;
+  background-color: #234361;
+  font-family: 'Roboto Condensed', sans-serif;
+  outline: 0;
+  margin: 5px;
+  cursor: pointer;
 }
 
 button:disabled {
-    background-color: silver;
-    cursor: not-allowed;
+  background-color: silver;
+  cursor: not-allowed;
 }

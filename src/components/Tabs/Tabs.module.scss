@@ -8,6 +8,24 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-evenly;
+    min-height: 22px;
+
+    > .option {
+      display: grid;
+      place-items: center;
+      color: #444;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      flex: 1;
+      min-height: 20px;
+      cursor: pointer;
+
+      &:hover,
+      &.selected {
+        color: white;
+        background-color: #234361;
+      }
+    }
   }
 
   .content {

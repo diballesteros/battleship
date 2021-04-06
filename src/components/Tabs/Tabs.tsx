@@ -33,8 +33,13 @@ const Tabs: React.FC = () => {
       <div className={styles.options}>
         {SHIPSTORE.map((el, index) => {
           return (
-            <div key={`tab-${index + 1}`} onClick={() => setCurrentTab(index)} role="presentation">
-              {el.model}
+            <div
+              className={`${styles.option} ${currentTab === index ? styles.selected : ''}`}
+              key={`tab-${index + 1}`}
+              onClick={() => setCurrentTab(index)}
+              role="presentation"
+            >
+              {index}
             </div>
           );
         })}
