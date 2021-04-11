@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { animated, useTransition } from 'react-spring';
 import { SHIPSTORE } from 'constants/constant';
+import Square from 'components/square/Square';
+import { ReactComponent as PreviousSVG } from 'assets/previous.svg';
+import { ReactComponent as NextSVG } from 'assets/next.svg';
 import styles from './Tabs.module.scss';
 
 const Tabs: React.FC = () => {
@@ -24,10 +27,29 @@ const Tabs: React.FC = () => {
       transform: `translate3d(${(previousTab - currentTab) * 100}%,0,0)`,
       zIndex: 1,
       position: 'absolute',
-      boxShadow: '0px 0px 5px #000',
     }),
   });
   if (currentTab !== previousTab) setPreviousTab(currentTab);
+
+  const handlePrevious = () => {
+    setPreviousTab(currentTab);
+    setCurrentTab(currentTab - 1);
+    if (currentTab === 0) {
+      setCurrentTab(4);
+    } else {
+      setCurrentTab(currentTab - 1);
+    }
+  };
+
+  const handleNext = () => {
+    setPreviousTab(currentTab);
+    if (currentTab === 4) {
+      setCurrentTab(0);
+    } else {
+      setCurrentTab(currentTab + 1);
+    }
+  };
+
   return (
     <div className={styles.tabs}>
       <div className={styles.options}>
@@ -45,19 +67,29 @@ const Tabs: React.FC = () => {
         })}
       </div>
       <div className={styles.content}>
-        {transitions.map(({ item, key, props }) => (
-          <animated.div
-            key={key}
-            style={{
-              ...props,
-              width: '100%',
-              height: '100%',
-              background: 'linear-gradient(to right, red , yellow)',
-            }}
-          >
-            {item.model}
-          </animated.div>
-        ))}
+        <PreviousSVG onClick={handlePrevious} />
+        <div className={styles.shipContainer}>
+          {transitions.map(({ item, key, props }) => (
+            <animated.div
+              key={key}
+              style={{
+                ...props,
+                width: '100%',
+                height: '100%',
+              }}
+            >
+              {item.model}
+              <div className={styles.ship}>
+                {Array(item.size)
+                  .fill('')
+                  .map((el, i) => {
+                    return <Square key={`${item.model}-factory-${i + 1}`} />;
+                  })}
+              </div>
+            </animated.div>
+          ))}
+        </div>
+        <NextSVG onClick={handleNext} />
       </div>
     </div>
   );

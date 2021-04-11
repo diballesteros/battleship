@@ -29,8 +29,32 @@
   }
 
   .content {
+    display: flex;
+    align-items: center;
+    width: 100%;
     position: relative;
     flex: 1;
-    overflow-x: hidden;
+    overflow: hidden;
+
+    .shipContainer {
+      display: flex;
+      flex-flow: column nowrap;
+      flex: 1;
+      height: 100%;
+
+      .ship {
+        display: grid;
+        grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
+        width: 32px;
+        margin: 0 auto;
+        flex: 1;
+        height: 100%;
+      }
+    }
+
+    svg {
+      width: 20px;
+      cursor: pointer;
+    }
   }
 }
