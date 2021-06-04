@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { animated, useTransition } from 'react-spring';
 import { SHIPSTORE } from 'constants/constant';
 import Square from 'components/square/Square';
+import useWindowSize from 'hooks/useWindowSize';
 import { ReactComponent as PreviousSVG } from 'assets/previous.svg';
 import { ReactComponent as NextSVG } from 'assets/next.svg';
 import styles from './Tabs.module.scss';
@@ -9,6 +10,10 @@ import styles from './Tabs.module.scss';
 const Tabs: React.FC = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [previousTab, setPreviousTab] = useState(0);
+  const [squareHeight, setSquareHeight] = useState(30);
+  const [squareWidth, setSquareWidth] = useState(30);
+  const [height, width] = useWindowSize();
+  console.log(width);
 
   const transitions = useTransition(SHIPSTORE[currentTab], (e) => e.model, {
     unique: true,
@@ -50,6 +55,13 @@ const Tabs: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    setSquareHeight(height / 13.8);
+    setSquareWidth(width / 22.5);
+  }, [height, setSquareHeight, setSquareWidth, width]);
+
+  console.log(squareHeight);
+
   return (
     <div className={styles.tabs}>
       <div className={styles.options}>
@@ -83,7 +95,13 @@ const Tabs: React.FC = () => {
                 {Array(item.size)
                   .fill('')
                   .map((el, i) => {
-                    return <Square key={`${item.model}-factory-${i + 1}`} />;
+                    return (
+                      <Square
+                        key={`${item.model}-factory-${i + 1}`}
+                        width={squareWidth}
+                        height={squareHeight}
+                      />
+                    );
                   })}
               </div>
             </animated.div>
