@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { animated, useTransition } from 'react-spring';
+import { useDispatch, useSelector } from 'react-redux';
 import { SHIPSTORE } from 'constants/constant';
+import { handleNext, handlePrevious, setCurrentTab } from 'reducers/Display.slice';
 import Square from 'components/square/Square';
-import useWindowSize from 'hooks/useWindowSize';
 import { ReactComponent as PreviousSVG } from 'assets/previous.svg';
 import { ReactComponent as NextSVG } from 'assets/next.svg';
 import styles from './Tabs.module.scss';
 
 const Tabs: React.FC = () => {
-  const [currentTab, setCurrentTab] = useState(0);
-  const [previousTab, setPreviousTab] = useState(0);
-  const [squareHeight, setSquareHeight] = useState(30);
-  const [squareWidth, setSquareWidth] = useState(30);
-  const [height, width] = useWindowSize();
-  console.log(width);
+  const dispatch = useDispatch();
+  const { currentTab, isVertical, previousTab, squareWidth, squareHeight } = useSelector(
+    (state: RootState) => state.display
+  );
 
   const transitions = useTransition(SHIPSTORE[currentTab], (e) => e.model, {
     unique: true,
@@ -34,33 +33,10 @@ const Tabs: React.FC = () => {
       position: 'absolute',
     }),
   });
-  if (currentTab !== previousTab) setPreviousTab(currentTab);
 
-  const handlePrevious = () => {
-    setPreviousTab(currentTab);
-    setCurrentTab(currentTab - 1);
-    if (currentTab === 0) {
-      setCurrentTab(4);
-    } else {
-      setCurrentTab(currentTab - 1);
-    }
+  const onDrag = (e: React.DragEvent) => {
+    e.preventDefault();
   };
-
-  const handleNext = () => {
-    setPreviousTab(currentTab);
-    if (currentTab === 4) {
-      setCurrentTab(0);
-    } else {
-      setCurrentTab(currentTab + 1);
-    }
-  };
-
-  useEffect(() => {
-    setSquareHeight(height / 13.8);
-    setSquareWidth(width / 22.5);
-  }, [height, setSquareHeight, setSquareWidth, width]);
-
-  console.log(squareHeight);
 
   return (
     <div className={styles.tabs}>
@@ -70,7 +46,7 @@ const Tabs: React.FC = () => {
             <div
               className={`${styles.option} ${currentTab === index ? styles.selected : ''}`}
               key={`tab-${index + 1}`}
-              onClick={() => setCurrentTab(index)}
+              onClick={() => dispatch(setCurrentTab(index))}
               role="presentation"
             >
               {index}
@@ -79,7 +55,7 @@ const Tabs: React.FC = () => {
         })}
       </div>
       <div className={styles.content}>
-        <PreviousSVG onClick={handlePrevious} />
+        <PreviousSVG onClick={() => dispatch(handlePrevious())} />
         <div className={styles.shipContainer}>
           {transitions.map(({ item, key, props }) => (
             <animated.div
@@ -88,18 +64,27 @@ const Tabs: React.FC = () => {
                 ...props,
                 width: '100%',
                 height: '100%',
+                display: 'flex',
+                flexFlow: 'column nowrap',
+                alignItems: 'center',
               }}
             >
-              {item.model}
-              <div className={styles.ship}>
+              <span className={styles.model}>{item.model}</span>
+              <div
+                className={styles.ship}
+                draggable
+                onDrag={onDrag}
+                style={{ flexDirection: isVertical ? 'column' : 'row' }}
+              >
                 {Array(item.size)
                   .fill('')
                   .map((el, i) => {
                     return (
                       <Square
+                        isShip
                         key={`${item.model}-factory-${i + 1}`}
-                        width={squareWidth}
-                        height={squareHeight}
+                        height={squareHeight - 1}
+                        width={squareWidth - 1}
                       />
                     );
                   })}
@@ -107,7 +92,7 @@ const Tabs: React.FC = () => {
             </animated.div>
           ))}
         </div>
-        <NextSVG onClick={handleNext} />
+        <NextSVG onClick={() => dispatch(handleNext())} />
       </div>
     </div>
   );

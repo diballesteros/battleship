@@ -1,4 +1,4 @@
-import { GameState, TFactoryShip } from './Types';
+import { DisplayState, GameState, TFactoryShip } from './Types';
 
 // Game
 export const FIRSTCOLUMNSQUARES = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
@@ -70,4 +70,12 @@ export const INITIAL_STATE: GameState = {
   playerMoves: [],
   completedComputerMoves: [],
   gameResolved: false,
+};
+
+export const INITIAL_DISPLAY_STATE: DisplayState = {
+  currentTab: 0,
+  isVertical: true,
+  previousTab: 0,
+  squareHeight: 30,
+  squareWidth: 30,
 };

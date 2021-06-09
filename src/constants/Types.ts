@@ -9,6 +9,14 @@ export type GameState = {
   gameResolved: boolean;
 };
 
+export type DisplayState = {
+  currentTab: number;
+  isVertical: boolean;
+  previousTab: number;
+  squareHeight: number;
+  squareWidth: number;
+};
+
 export type GameActions =
   | {
       type: 'SET_BOARD';

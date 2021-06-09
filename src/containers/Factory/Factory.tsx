@@ -1,10 +1,12 @@
 import React from 'react';
-import Square from 'components/square/Square';
+import { useDispatch } from 'react-redux';
+import { rotate } from 'reducers/Display.slice';
 import Button from 'components/UI/button/Button';
 import Tabs from 'components/Tabs/Tabs';
 import styles from './Factory.module.scss';
 
 const Factory: React.FC = () => {
+  const dispatch = useDispatch();
   return (
     <div className={styles.factory}>
       <div className={styles.store}>
@@ -13,9 +15,6 @@ const Factory: React.FC = () => {
           <span>Drag and drop the ship below on a square</span>
         </div>
         <div className={styles.store__container}>
-          <div className={styles.model}>
-            <span>{false ? 'All ships built! You may start the game.' : `Model: N/A`}</span>
-          </div>
           <div className={styles.builder}>
             <Tabs />
           </div>
@@ -24,11 +23,11 @@ const Factory: React.FC = () => {
             <Button disabled clicked={null}>
               Start Game
             </Button>
-            <Button clicked={null} disabled={false}>
+            <Button clicked={() => dispatch(rotate())} disabled={false}>
               Rotate
             </Button>
             <Button disabled={false} clicked={null}>
-              Undo
+              Remove
             </Button>
           </div>
         </div>

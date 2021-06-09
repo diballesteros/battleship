@@ -39,16 +39,22 @@
     .shipContainer {
       display: flex;
       flex-flow: column nowrap;
+      align-items: center;
       flex: 1;
       height: 100%;
 
+      .model {
+        font-size: 32px;
+      }
+
       .ship {
         display: flex;
-        flex-flow: column nowrap;
+        flex-wrap: nowrap;
         align-items: center;
         justify-content: center;
         flex: 1;
         height: 100%;
+        cursor: grab;
       }
     }
 

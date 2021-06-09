@@ -1,8 +1,9 @@
 .square {
   border: 1px solid black;
+  background-color: grey;
+  color: red;
   font-size: 32px;
   text-align: center;
-  cursor: pointer;
 
   &.ocean {
     background-color: skyblue;
@@ -11,15 +12,5 @@
 }
 
 .my_square {
-  cursor: default;
-}
-
-.ship-square {
-  background-color: grey;
-  color: red;
-}
-
-.grid-square {
-  background-color: beige;
   cursor: default;
 }
